@@ -29,6 +29,9 @@ export function Navbar() {
         {isAuthenticated && (
           <div className="ml-8 flex items-center space-x-4">
             <Button asChild variant="ghost">
+              <Link href="/catalog">Gurulogue</Link>
+            </Button>
+            <Button asChild variant="ghost">
               <Link href="/offers">Offres</Link>
             </Button>
             <Button asChild variant="ghost">
