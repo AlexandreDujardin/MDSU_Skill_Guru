@@ -3,6 +3,8 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export async function middleware(request: NextRequest) {
+  const response = NextResponse.next(); // Create response
+
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -15,25 +17,12 @@ export async function middleware(request: NextRequest) {
     }
   );
 
-  const { data: { session } } = await supabase.auth.getSession();
+  const { data: session, error } = await supabase.auth.getSession();
 
-  const url = request.nextUrl.clone();
-
-  // Redirect unauthenticated users away from protected pages
-  if (!session && url.pathname.startsWith('/account')) {
-    url.pathname = '/';
-    return NextResponse.redirect(url);
+  if (!session) {
+    console.error('No session or refresh token found:', error);
+    return NextResponse.redirect(new URL('/', request.url));
   }
 
-  // Redirect authenticated users from auth pages
-  if (session && (url.pathname === '/' || url.pathname.startsWith('/auth'))) {
-    url.pathname = '/dashboard';
-    return NextResponse.redirect(url);
-  }
-
-  return NextResponse.next();
+  return response;
 }
-
-export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
-};

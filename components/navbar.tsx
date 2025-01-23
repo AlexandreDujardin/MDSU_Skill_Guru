@@ -43,7 +43,7 @@ export function Navbar() {
           {isAuthenticated ? (
             <form action={logout}>
               <Button variant="ghost">
-                Log Out
+                Se déconnecter
               </Button>
             </form>
           ) : (

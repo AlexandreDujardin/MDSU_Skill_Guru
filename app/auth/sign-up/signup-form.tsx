@@ -12,75 +12,92 @@ import Link from 'next/link'
 export function SignUpForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [loading, setLoading] = useState(false)
+  const [firstname, setFirstname] = useState('')
+  const [lastname, setLastname] = useState('')
+  const [phone, setPhone] = useState('')
+  const [role, setRole] = useState('')
+  const [codeUai, setCodeUai] = useState('')
   const router = useRouter()
-  const supabase = createClient()
 
-  const handleSignUp = async (e: React.FormEvent) => {
+  const handleSignUp = async (e) => {
     e.preventDefault()
-    setLoading(true)
 
-    try {
-      const { error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          emailRedirectTo: `${location.origin}/auth/callback`,
+    const supabase = createClient()
+
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          firstname,
+          lastname,
+          phone,
+          role,
+          code_uai: role === 'Campus' ? codeUai : null,
         },
-      })
+      },
+    })
 
-      if (error) throw error
-
-      router.refresh()
-      router.push('/dashboard')
-    } catch (error) {
+    if (error) {
       console.error('Error signing up:', error)
-    } finally {
-      setLoading(false)
+      return
+    }
+
+    if (data) {
+      router.push('/auth/sign-in')
     }
   }
 
   return (
-    <Card className="w-[350px]">
+    <Card>
       <CardHeader>
-        <CardTitle>S'incrire</CardTitle>
-        <CardDescription>Créez votre compte pour commencer</CardDescription>
+        <CardTitle>Créer un compte</CardTitle>
+        <CardDescription>
+          Découvrez tout le potentiel de notre plateforme gratuitement pendant 30 jours.
+        </CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSignUp} className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="email">Mail</Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="test@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+        <form onSubmit={handleSignUp} className="grid grid-cols-2 gap-4">
+          <div>
+            <Label>Nom</Label>
+            <Input value={lastname} onChange={(e) => setLastname(e.target.value)} required />
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="password">Mot de passe</Label>
-            <Input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+          <div>
+            <Label>Je suis</Label>
+            <select value={role} onChange={(e) => setRole(e.target.value)} required>
+              <option value="">Sélectionnez</option>
+              <option value="Formateur">Formateur</option>
+              <option value="Campus">Campus</option>
+            </select>
           </div>
-          <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? 'Chargement...' : 'S\'inscrire'}
-          </Button>
+          <div>
+            <Label>Prénom</Label>
+            <Input value={firstname} onChange={(e) => setFirstname(e.target.value)} required />
+          </div>
+          <div>
+            <Label>Numéro de téléphone</Label>
+            <Input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} required />
+          </div>
+          <div>
+            <Label>Email professionnel</Label>
+            <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          </div>
+          <div>
+            <Label>Mot de passe</Label>
+            <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+          </div>
+          {role === 'Campus' && (
+            <div className="col-span-2">
+              <Label>Code UAI</Label>
+              <Input value={codeUai} onChange={(e) => setCodeUai(e.target.value)} required />
+            </div>
+          )}
+          <div className="col-span-2">
+            <Button type="submit">Créer mon compte</Button>
+          </div>
         </form>
-        <div className="mt-4 text-center text-sm">
-          Déja un compte ?{" "}
-          <Link href="/auth/sign-in" className="text-primary hover:underline">
-            Se connecter
-          </Link>
-        </div>
+        <Link href="/auth/sign-in">Déjà inscrit ? Connectez-vous en cliquant ici</Link>
       </CardContent>
     </Card>
   )
 }
-
