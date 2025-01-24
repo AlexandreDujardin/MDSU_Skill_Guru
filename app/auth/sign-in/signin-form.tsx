@@ -29,7 +29,7 @@ export function SignInForm() {
       if (error) throw error
 
       router.refresh()
-      router.push('/dashboard')
+      router.push('/')
     } catch (error) {
       console.error('Error signing in:', error)
     } finally {
