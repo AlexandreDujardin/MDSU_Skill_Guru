@@ -56,7 +56,7 @@ export function ProductCard({ product }: ProductCardProps) {
       </CardContent>
       <CardFooter className="flex justify-between items-center">
         <div className="text-2xl font-bold">
-          {new Intl.NumberFormat('en-US', {
+          {new Intl.NumberFormat('fr-FR', {
             style: 'currency',
             currency: currency,
           }).format(amount)}

@@ -1,0 +1,18 @@
+[
+  {
+    "title": "Cyberpunk 2077",
+    "description": "Plongez dans l'univers de Cyberpunk grâce au jeu original Cyberpunk 2077, avec son extension Phantom Liberty, qui mêle espionnage et frissons, ou en regardant la série animée Cyberpunk: Edgerunners. Il y a tout un tas d'histoires à découvrir au cœur de la dangereuse mégalopole de Night City.",
+    "tag": "Action",
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA8a8xyQDCL0uUjqRI5LkOGGJj9GumfKSkyFSreI96UMT-QCyx9h0MUEC3ZsbSFtbnwHCdvoqk697uHqeJszL-LXuTG8ChJdWEMUZh_A",
+    "video": "https://www.youtube.com/embed/qIcTM8WXFjk?si=4ezesrSYRCQ_VpZj",
+    "slug": "cyberpunk-2077"
+  },
+  {
+    "title": "Elden ring",
+    "description": "L'Ordre d'or a été anéanti. Levez-vous, Sans-éclat, et puisse la grâce guider vos pas. Brandissez la puissance du Cercle d'Elden. Devenez Seigneur de l'Entre-terre. Dans l'Entre-terre où règne la reine Marika l'Éternelle, le Cercle d'Elden, source vitale de l'Arbre-Monde, fut brisé. Les descendants de Marika, tous des demi-dieux, revendiquèrent les éclats du Cercle d'Elden, également appelés runes majeures. Ainsi débuta l'Éclatement, une guerre émanant de la folie provoquée par leur puissance fraîchement acquise. Une guerre qui sonna le renoncement de la Volonté suprême. Ainsi viendra l'heure des Sans-éclat, eux à qui se refusa jadis la grâce dorée, et qui furent exilés de l'Entre-terre. Vous qui avez péri et qui pourtant vivez, cheminez vers l'Entre-terre, par-delà la Mer de brume, pour vous tenir devant le Cercle d'Elden. Et ainsi en devenir Seigneur.",
+    "tag": "Puzzle",
+    "thumbnail": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSv5qRbJpYu3dXoq5OqnWRaPwjjhF6MDJfy6EUi86rD9t03s7YHd9QDacXf_6JCue2oXo2QjJdhpptkFOhDq3_d_Q_iQPk7Go5ZpG9hZg",
+    "video": "https://www.youtube.com/embed/E3Huy2cdih0?si=LLC0tGq9RI1aStIs",
+    "slug": "elden-ring"
+  }
+]

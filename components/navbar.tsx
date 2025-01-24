@@ -23,22 +23,6 @@ export function Navbar() {
   return (
     <nav className="border-b">
       <div className="flex h-16 items-center px-4 md:px-8">
-        <Link href="/" className="text-xl font-bold">
-          Skill Guru
-        </Link>
-        {isAuthenticated && (
-          <div className="ml-8 flex items-center space-x-4">
-            <Button asChild variant="ghost">
-              <Link href="/offers">Offres</Link>
-            </Button>
-            <Button asChild variant="ghost">
-              <Link href="/account">Mon compte</Link>
-            </Button>
-            <Button asChild variant="ghost">
-              <Link href="/classes">Classes</Link>
-            </Button>
-          </div>
-        )}
         <div className="ml-auto flex items-center space-x-4">
           {isAuthenticated ? (
             <form action={logout}>
