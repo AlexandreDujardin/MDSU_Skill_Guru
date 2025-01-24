@@ -1,6 +1,7 @@
 import { createClient } from '@/utils/supabase/server'
 import { redirect } from 'next/navigation'
 import { Navbar } from '@/components/navbar'
+import { DashboardLayout } from '@/app/DashboardLayout'
 import { ClassList } from './class-list'
 import { AddClassForm } from './add-class-form'
 
