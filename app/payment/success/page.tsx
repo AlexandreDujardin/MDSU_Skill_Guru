@@ -64,7 +64,7 @@ export default async function SuccessPage({
             <span className="block mt-2">Order ID: {checkoutSession.id}</span>
           </p>
           <Button asChild>
-            <Link href="/dashboard">Retour à l'acceuil</Link>
+            <Link href="/">Retour à l'acceuil</Link>
           </Button>
         </div>
       );
