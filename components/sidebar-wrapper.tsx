@@ -31,13 +31,17 @@ export function SidebarWrapper({ children }: { children: React.ReactNode }) {
     <SidebarProvider>
       {/* Sidebar */}
       <Sidebar>
-        <SidebarHeader>
-          <Link href="/" className="block text-lg font-bold px-4 py-2">
-            Skill Guru
-          </Link>
-        </SidebarHeader>
+      <SidebarHeader className="flex justify-center items-center py-4">
+        <Link href="/" className="block">
+          <img
+            src="/images/logo_brand.png" // Replace this with the path to your logo
+            alt="Skill Guru Logo"
+            className="h-12 w-auto" // Adjust the height as needed
+          />
+        </Link>
+      </SidebarHeader>
 
-        <SidebarContent>
+        <SidebarContent className="flex flex-col justify-center h-full space-y-4">
           {/* Dashboard Link - Only for Non-Authenticated Users */}
           {!isAuthenticated && (
             <Link href="/signin" className="block p-4 hover:bg-gray-100">
@@ -60,13 +64,22 @@ export function SidebarWrapper({ children }: { children: React.ReactNode }) {
               <Link href="/classes" className="block p-4 hover:bg-gray-100">
                 Classes
               </Link>
+              <Link href="/classes" className="block p-4 hover:bg-gray-100">
+                Suivi pédagogique
+              </Link>
+              <Link href="/classes" className="block p-4 hover:bg-gray-100">
+                Support
+              </Link>
             </>
           )}
         </SidebarContent>
 
         <SidebarFooter>
           <hr />
-          <p className="text-xs text-gray-500 mt-4">© 2025 Skill Guru</p>
+          <div className="items-center justify-center flex flex-col">
+            <p className="text-xs text-gray-500 mt-4">V0.1</p>
+            <p className="text-xs text-gray-500 mt-4">© 2025 Skill Guru</p>
+          </div>
         </SidebarFooter>
       </Sidebar>
 
