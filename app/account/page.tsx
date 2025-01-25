@@ -1,6 +1,5 @@
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
-import { Navbar } from '@/components/navbar';
 import { stripe } from '@/utils/stripe';
 import { AccountTabs } from './account-tabs';
 
@@ -21,7 +20,6 @@ export default async function AccountPage() {
   if (!profile?.stripe_customer_id) {
     return (
       <div className="flex min-h-screen flex-col">
-        <Navbar />
         <main className="flex-1 container py-8">
           <h1 className="text-3xl font-bold mb-8">Mon compte</h1>
           <p>Please set up your payment information to access subscriptions.</p>
