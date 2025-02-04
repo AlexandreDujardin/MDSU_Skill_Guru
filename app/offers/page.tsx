@@ -2,6 +2,7 @@ import { createClient } from '@/utils/supabase/server'
 import { redirect } from 'next/navigation'
 import { stripe } from '@/utils/stripe'
 import { ProductList } from './product-list'
+import { PageLayout } from '@/components/PageLayout'
 
 export default async function OffersPage() {
   const supabase = createClient()
@@ -17,10 +18,9 @@ export default async function OffersPage() {
   })
 
   return (
-      <main className="flex-1 container py-8">
-        <h1 className="text-3xl font-bold mb-8">Nos offres</h1>
-        <ProductList products={products} />
-      </main>
+    <PageLayout>
+      <ProductList products={products} />
+    </PageLayout>
   )
 }
 

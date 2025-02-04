@@ -2,6 +2,7 @@ import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 import { stripe } from '@/utils/stripe';
 import { AccountTabs } from './account-tabs';
+import { PageLayout } from '@/components/PageLayout';
 
 export default async function AccountPage() {
   const supabase = createClient();
@@ -19,12 +20,9 @@ export default async function AccountPage() {
 
   if (!profile?.stripe_customer_id) {
     return (
-      <div className="flex min-h-screen flex-col">
-        <main className="flex-1 container py-8">
-          <h1 className="text-3xl font-bold mb-8">Mon compte</h1>
-          <p>Please set up your payment information to access subscriptions.</p>
-        </main>
-      </div>
+      <PageLayout>
+        <p>Please set up your payment information to access subscriptions.</p>
+      </PageLayout>
     );
   }
 
@@ -79,16 +77,14 @@ export default async function AccountPage() {
   );
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <Navbar />
-      <main className="flex-1 container py-8">
-        <h1 className="text-3xl font-bold mb-8">Paramètre du compte</h1>
+    <PageLayout>
+      <h1 className="text-3xl font-bold mb-8">Paramètre du compte</h1>
         <AccountTabs
           profile={profile}
           subscriptions={subscriptionsWithProducts}
           user={session.user}
         />
-      </main>
-    </div>
+    </PageLayout>
+
   );
 }

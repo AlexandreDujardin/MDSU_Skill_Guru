@@ -1,4 +1,5 @@
 import { GameDetail } from "@/components/GameDetail";
+import { PageLayout } from "@/components/PageLayout";
 import games from "@/public/games.json";
 
 const GameDetailPage = ({ params }: { params: { slug: string } }) => {
@@ -13,14 +14,14 @@ const GameDetailPage = ({ params }: { params: { slug: string } }) => {
   }
 
   return (
-      <div className="container mx-auto py-10">
-        <GameDetail
+    <PageLayout>
+      <GameDetail
           title={game.title}
           description={game.description}
           tag={game.tag}
           video={game.video}
         />
-      </div>
+    </PageLayout>
   );
 };
 
