@@ -1,7 +1,7 @@
 import { createClient } from '@/utils/supabase/server'
 import { redirect } from 'next/navigation'
 import { stripe } from '@/utils/stripe'
-import { ProductList } from './product-list'
+import { ProductList } from '../../components/ui/products/product-list'
 import { PageLayout } from '@/components/PageLayout'
 
 export default async function OffersPage() {
@@ -19,7 +19,7 @@ export default async function OffersPage() {
 
   return (
     <PageLayout>
-      <ProductList products={products} />
+      <ProductList />
     </PageLayout>
   )
 }

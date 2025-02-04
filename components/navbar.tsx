@@ -41,7 +41,7 @@ export function Navbar({ pageTitle }: { pageTitle: string }) {
         {isAuthenticated ? (
           <Link href="/account" className="rounded-full focus:outline-none">
             <img
-              src={userAvatar || '/default-avatar.png'} // Fallback to a default avatar
+              src={userAvatar || 'images/default-avatar.svg'} // Fallback to a default avatar
               alt="User Avatar"
               className="h-10 w-10 rounded-full object-cover border"
             />
