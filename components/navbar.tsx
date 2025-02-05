@@ -40,7 +40,7 @@ export function Navbar({ pageTitle }: { pageTitle: string }) {
       {/* User Section */}
       <div className="flex items-center space-x-4">
         {isAuthenticated ? (
-          <div>
+          <div className='flex items-center space-x-4'>
             <form action={logout}>
               <Button variant="ghost">
                 Se déconnecter

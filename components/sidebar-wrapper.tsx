@@ -34,7 +34,7 @@ export function SidebarWrapper({ children }: { children: React.ReactNode }) {
       <SidebarHeader className="flex justify-center items-center py-4">
         <Link href="/" className="block">
           <img
-            src="/images/logo_brand.png" // Replace this with the path to your logo
+            src="/images/logo_brand.svg" // Replace this with the path to your logo
             alt="Skill Guru Logo"
             className="h-12 w-auto" // Adjust the height as needed
           />
@@ -54,12 +54,6 @@ export function SidebarWrapper({ children }: { children: React.ReactNode }) {
             <>
               <Link href="/catalog" className="block p-4 hover:bg-gray-100">
                 Gurulogue
-              </Link>
-              <Link href="/offers" className="block p-4 hover:bg-gray-100">
-                Offres
-              </Link>
-              <Link href="/account" className="block p-4 hover:bg-gray-100">
-                Mon compte
               </Link>
               <Link href="/classes" className="block p-4 hover:bg-gray-100">
                 Classes
