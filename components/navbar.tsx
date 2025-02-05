@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { createClient } from '@/utils/supabase/client';
+import { logout } from '@/app/actions';
 
 export function Navbar({ pageTitle }: { pageTitle: string }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -39,13 +40,20 @@ export function Navbar({ pageTitle }: { pageTitle: string }) {
       {/* User Section */}
       <div className="flex items-center space-x-4">
         {isAuthenticated ? (
-          <Link href="/account" className="rounded-full focus:outline-none">
-            <img
-              src={userAvatar || 'images/default-avatar.svg'} // Fallback to a default avatar
-              alt="User Avatar"
-              className="h-10 w-10 rounded-full object-cover border"
-            />
-          </Link>
+          <div>
+            <form action={logout}>
+              <Button variant="ghost">
+                Se déconnecter
+              </Button>
+            </form>
+            <Link href="/account" className="rounded-full focus:outline-none">
+              <img
+                src={userAvatar || 'images/default-avatar.svg'} // Fallback to a default avatar
+                alt="User Avatar"
+                className="h-10 w-10 rounded-full object-cover border"
+              />
+            </Link>
+          </div>
         ) : (
           <>
             <Button asChild variant="ghost">

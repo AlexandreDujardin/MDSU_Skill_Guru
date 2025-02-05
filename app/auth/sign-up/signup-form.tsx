@@ -14,6 +14,7 @@ export default function SignUpForm() {
   const [password, setPassword] = useState('');
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
+  const [phone, setPhone] = useState('');
   const [role, setRole] = useState('');
   const [codeUai, setCodeUai] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
@@ -62,6 +63,10 @@ export default function SignUpForm() {
         <div>
           <Label>Email professionnel*</Label>
           <Input value={email} onChange={(e) => setEmail(e.target.value)} required />
+        </div>
+        <div>
+          <Label>Téléphone*</Label>
+          <Input value={phone} onChange={(e) => setPhone(e.target.value)} required />
         </div>
         <div>
           <Label>Mot de passe*</Label>

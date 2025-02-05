@@ -19,7 +19,7 @@ export async function createCheckoutSession(priceId: string) {
       throw new Error('Not authenticated');
     }
 
-    // Fetch the user's profile
+    // Fetch the user's profile from Supabase
     const { data: profile, error: profileError } = await supabase
       .from('profiles')
       .select('stripe_customer_id')
@@ -32,27 +32,41 @@ export async function createCheckoutSession(priceId: string) {
 
     let customerId = profile?.stripe_customer_id;
 
-    // If the customer doesn't exist in Stripe, create it
+    // 🔥 Check if Stripe customer exists (handle deleted customers)
+    if (customerId) {
+      try {
+        await stripe.customers.retrieve(customerId);
+      } catch (error: any) {
+        if (error.code === "resource_missing") {
+          console.warn(`Stripe customer ${customerId} does not exist. Creating a new one.`);
+          customerId = null;
+        } else {
+          throw error;
+        }
+      }
+    }
+
+    // 🆕 If the customer doesn't exist, create it
     if (!customerId) {
       const customer = await stripe.customers.create({
         email: session.user.email,
         metadata: { userId: session.user.id },
       });
 
-      // Update the profile with the new Stripe customer ID
+      // Update Supabase with new Stripe customer ID
       const { error: updateError } = await supabase
         .from('profiles')
         .update({ stripe_customer_id: customer.id })
         .eq('id', session.user.id);
 
       if (updateError) {
-        throw new Error('Error updating user profile with Stripe customer ID');
+        throw new Error('Error updating user profile with new Stripe customer ID');
       }
 
       customerId = customer.id;
     }
 
-    // Create the checkout session
+    // Create Stripe Checkout Session
     const checkoutSession = await stripe.checkout.sessions.create({
       mode: 'subscription',
       payment_method_types: ['card'],

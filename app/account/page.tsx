@@ -12,69 +12,58 @@ export default async function AccountPage() {
     redirect('/');
   }
 
-  const { data: profile } = await supabase
+  const { data: profile, error: profileError } = await supabase
     .from('profiles')
     .select('*')
     .eq('id', session.user.id)
     .single();
 
-  if (!profile?.stripe_customer_id) {
-    return (
-      <PageLayout>
-        <p>Please set up your payment information to access subscriptions.</p>
-      </PageLayout>
-    );
+  if (profileError) {
+    console.error("Error fetching profile:", profileError);
+    redirect('/');
   }
 
   // Fetch subscriptions for the user
-  const subscriptions = await stripe.subscriptions.list({
-    customer: profile.stripe_customer_id,
-    status: 'all',
-    expand: ['data.items'],
-  });
+  let subscriptionsWithProducts = [];
+  if (profile?.stripe_customer_id) {
+    const subscriptions = await stripe.subscriptions.list({
+      customer: profile.stripe_customer_id,
+      status: 'all',
+      expand: ['data.items'],
+    });
 
-  // Fetch product details and serialize the data
-  const subscriptionsWithProducts = await Promise.all(
-    subscriptions.data.map(async (subscription) => {
-      const itemsWithProducts = await Promise.all(
-        subscription.items.data.map(async (item) => {
-          const price = item.price;
-          const product = await stripe.products.retrieve(price.product as string);
+    subscriptionsWithProducts = await Promise.all(
+      subscriptions.data.map(async (subscription) => {
+        const itemsWithProducts = await Promise.all(
+          subscription.items.data.map(async (item) => {
+            const price = item.price;
+            const product = await stripe.products.retrieve(price.product as string);
 
-          return {
-            ...item,
-            price: {
-              ...price,
-              // Ensure `price.product` is a string
-              product: price.product,
-            },
-            product: {
-              ...product,
-            },
-          };
-        })
-      );
+            return {
+              ...item,
+              price: {
+                id: price.id,
+                unit_amount: price.unit_amount,
+                currency: price.currency,
+                recurring: price.recurring,
+              },
+              product: {
+                id: product.id,
+                name: product.name,
+                description: product.description,
+                images: product.images,
+              },
+            };
+          })
+        );
 
-      return {
-        ...subscription,
-        items: itemsWithProducts.map((item) => ({
-          ...item,
-          price: {
-            id: item.price.id,
-            unit_amount: item.price.unit_amount,
-            currency: item.price.currency,
-            recurring: item.price.recurring,
-          },
-          product: {
-            id: item.product.id,
-            name: item.product.name,
-            description: item.product.description,
-            images: item.product.images,
-          },
-        })),
-      };
-    })
-  );
+        return {
+          ...subscription,
+          items: itemsWithProducts,
+        };
+      })
+    );
+  }
 
   return (
     <PageLayout>
@@ -85,6 +74,5 @@ export default async function AccountPage() {
           user={session.user}
         />
     </PageLayout>
-
   );
 }
