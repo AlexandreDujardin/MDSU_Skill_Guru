@@ -52,8 +52,14 @@ export function SidebarWrapper({ children }: { children: React.ReactNode }) {
           {/* Authenticated Links */}
           {isAuthenticated && (
             <>
+              <Link href="/" className="block p-4 hover:bg-gray-100">
+                Accueil
+              </Link>
               <Link href="/catalog" className="block p-4 hover:bg-gray-100">
                 Gurulogue
+              </Link>
+              <Link href="/playlists" className="block p-4 hover:bg-gray-100">
+                Playlist de jeux
               </Link>
               <Link href="/classes" className="block p-4 hover:bg-gray-100">
                 Classes
