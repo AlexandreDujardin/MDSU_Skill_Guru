@@ -7,7 +7,7 @@ import { redirect } from 'next/navigation';
 export async function logout() {
   const supabase = createClient();
   await supabase.auth.signOut();
-  redirect('/');
+  redirect('/auth/sign-in');
 }
 
 export async function createCheckoutSession(priceId: string) {

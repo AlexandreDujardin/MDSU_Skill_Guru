@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import Link from 'next/link';
 import { AuthLayout } from '@/components/ui/AuthLayout';
+import { Eye, EyeOff } from 'lucide-react';
 
 export default function SignUpForm() {
   const [email, setEmail] = useState('');
@@ -18,6 +19,7 @@ export default function SignUpForm() {
   const [role, setRole] = useState('');
   const [codeUai, setCodeUai] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
   const supabase = createClient();
 
@@ -69,13 +71,23 @@ export default function SignUpForm() {
           <Input value={phone} onChange={(e) => setPhone(e.target.value)} required />
         </div>
         <div>
-          <Label>Mot de passe*</Label>
-          <Input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+        <Label>Mot de passe*</Label>
+          <div className="relative">
+            <Input
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Votre mot de passe"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-gray-700"
+            >
+              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+            </button>
+          </div>
         </div>
         <div>
           <Label>Je suis*</Label>
