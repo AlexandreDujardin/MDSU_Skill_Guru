@@ -46,7 +46,8 @@ export function Navbar({ pageTitle }: { pageTitle: string }) {
                 Se déconnecter
               </Button>
             </form>
-            <Link href="/account" className="rounded-full focus:outline-none">
+            <Link href="/account" className="flex items-center rounded-full focus:outline-none">
+              Mon compte
               <img
                 src={userAvatar || 'images/default-avatar.svg'} // Fallback to a default avatar
                 alt="User Avatar"
