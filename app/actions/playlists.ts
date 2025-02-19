@@ -65,21 +65,22 @@ export async function deletePlaylist(playlistId: string) {
 export async function addGameToPlaylist(playlistId: string, gameId: string) {
   const supabase = createClient();
   const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-  if (sessionError || !session?.user) throw new Error('Not authenticated');
+  
+  if (sessionError || !session?.user) throw new Error("Not authenticated");
 
   // Check if the game is already in the playlist
   const { data: existingGame } = await supabase
-    .from('playlist_games')
-    .select('id')
-    .eq('playlist_id', playlistId)
-    .eq('game_id', gameId)
+    .from("playlist_games")
+    .select("id")
+    .eq("playlist_id", playlistId)
+    .eq("game_id", gameId)
     .single();
 
-  if (existingGame) throw new Error('Game is already in this playlist.');
+  if (existingGame) throw new Error("Game is already in this playlist.");
 
-  // Insert the game into the playlist
+  // ✅ Allow adding games even if it's the Favorites playlist
   const { error } = await supabase
-    .from('playlist_games')
+    .from("playlist_games")
     .insert({
       playlist_id: playlistId,
       game_id: gameId,
@@ -87,8 +88,9 @@ export async function addGameToPlaylist(playlistId: string, gameId: string) {
 
   if (error) throw error;
 
-  revalidatePath('/playlists');
+  revalidatePath("/playlists");
 }
+
 
 export async function removeGameFromPlaylist(playlistId: string, gameId: string) {
   const supabase = createClient();

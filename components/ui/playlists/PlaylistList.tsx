@@ -5,17 +5,7 @@ import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 import { AddEditPlaylist } from '@/components/ui/playlists/AddEditPlaylist';
 import { deletePlaylist } from '@/app/actions/playlists';
 import { PlaylistCard } from '@/components/ui/playlists/PlayListCard';
-
-interface Playlist {
-  id: string;
-  name: string;
-  is_favorite: boolean;
-  games: { id: string; title: string; thumbnail: string; slug: string }[];
-}
-
-interface PlaylistListProps {
-  playlists: Playlist[];
-}
+import { AddGamesToPlaylist } from "@/components/ui/playlists/AddGamesToPlaylist";
 
 export function PlaylistList({ playlists }: PlaylistListProps) {
   return (
@@ -42,7 +32,10 @@ export function PlaylistList({ playlists }: PlaylistListProps) {
               )}
             </CardHeader>
 
-            {/* Use the PlaylistCard for displaying the playlist's games */}
+            {/* ✅ Allow adding games to ALL playlists, including Favorites */}
+            <AddGamesToPlaylist playlistId={playlist.id} />
+
+            {/* Display playlist games */}
             <PlaylistCard playlist={playlist} />
           </Card>
         ))
