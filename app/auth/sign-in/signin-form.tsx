@@ -46,7 +46,7 @@ export default function SignInForm() {
   };
 
   return (
-    <AuthLayout imageSrc="https://www.presse-citron.net/app/uploads/2020/12/test-cyberpunk-2077-1.jpg">
+    <AuthLayout imageSrc="/images/auth/image-background-connexion.svg">
       <h2 className="text-2xl font-bold mb-4">Connexion</h2>
       <p className="mb-6 text-gray-600">
         Veuillez renseigner votre email et mot de passe pour accéder à votre espace Skill Guru.

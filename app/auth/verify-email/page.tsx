@@ -3,7 +3,7 @@ import { AuthLayout } from '@/components/ui/AuthLayout';
 
 export default function VerifyEmail() {
   return (
-    <AuthLayout imageSrc="https://www.presse-citron.net/app/uploads/2020/12/test-cyberpunk-2077-1.jpg">
+    <AuthLayout imageSrc="/images/auth/image-background-connexion-etape-2.svg">
       <h2 className="text-2xl font-bold mb-4">Vérification de votre mail</h2>
       <p className="mb-6 text-gray-600">
         Votre demande d’inscription a bien été prise en compte. Merci de vérifier votre mail afin
