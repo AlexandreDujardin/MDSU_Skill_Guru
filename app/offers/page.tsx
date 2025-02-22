@@ -2,6 +2,7 @@ import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 import { PageLayout } from "@/components/PageLayout";
 import { ProductList } from '@/components/ui/products/product-list';
+import { Navbar } from '@/components/navbar';
 
 export default async function OffersPage() {
   const supabase = createClient();
@@ -40,9 +41,12 @@ export default async function OffersPage() {
   }
 
   return (
-    <PageLayout>
-      <h1 className="text-2xl font-bold mb-6">Nos Offres</h1>
-      <ProductList />
-    </PageLayout>
+    <div>
+      <Navbar pageTitle="Nos Offres" />
+      <PageLayout>
+        <h1 className="text-2xl font-bold mb-6">Nos Offres</h1>
+        <ProductList />
+      </PageLayout>
+    </div>
   );
 }

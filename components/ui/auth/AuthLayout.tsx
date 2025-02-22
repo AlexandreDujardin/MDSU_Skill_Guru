@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from '@/components/ui/button';
 
 export function AuthLayout({
   children,
@@ -18,10 +19,10 @@ export function AuthLayout({
         />
 
         {/* Button inside the image */}
-        <div className="absolute bottom-10 left-10">
-          <button className="bg-white text-primary font-semibold px-6 py-2 rounded-md shadow-md hover:bg-gray-100">
+        <div className="justify-center absolute inset-x-0 bottom-10 flex">
+          <Button type='tertiary'>
             Découvrir Skill Guru
-          </button>
+          </Button>
         </div>
       </div>
 

@@ -28,7 +28,6 @@ const getPageTitle = (pathname: string): string => {
       return "Mon compte";
     case "/classes":
       return "Classes";
-    
     default:
       return "Skill Guru";
   }
@@ -42,7 +41,7 @@ export default function RootLayoutClient({
   const pathname = usePathname();
 
   // Define the routes where the Sidebar and Navbar should not be visible
-  const authRoutes = ["/auth/sign-in", "/auth/sign-up", "/auth/verify-email"];
+  const authRoutes = ["/auth/sign-in", "/auth/sign-up", "/auth/verify-email", "/offers"];
   const hideLayout = authRoutes.includes(pathname);
 
   // Get the page title based on the current route

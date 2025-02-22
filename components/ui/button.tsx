@@ -8,10 +8,9 @@ const buttonVariants = cva(
   {
     variants: {
       type: {
-        primary: "bg-primary text-white hover:bg-primary/90",
-        secondary: "bg-secondary text-white hover:bg-secondary/90",
-        tertiary: "bg-transparent text-primary border border-primary hover:bg-primary/10",
-        ghost: "text-muted hover:bg-gray-100",
+        primary: "rounded-md gap-2 bg-button-primary text-text-alternative hover:bg-button-primary-hover pressed:bg-button-primary-pressed rounded-md gap-2",
+        secondary: "rounded-md gap-2 border-2 bg-button-secondary text-button-secondary border-button-primary-secondary hover:bg-background-surface text-text-primary border-button-secondary-hover pressed:bg-button-secondary-disabled border-button-secondary-pressed",
+        tertiary: "rounded-md gap-2 bg-button-tertiary text-text-tertiary hover:bg-button-tertiary-hover pressed:bg-button-tertiary-pressed",
       },
       size: {
         sm: "h-9 px-3 text-sm",
@@ -25,7 +24,6 @@ const buttonVariants = cva(
       },
       state: {
         default: "",
-        hover: "opacity-90",
         pressed: "opacity-80",
         disabled: "opacity-50 cursor-not-allowed",
       },

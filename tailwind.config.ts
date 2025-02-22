@@ -14,61 +14,97 @@ const config: Config = {
         inter: ["Inter", "sans-serif"],
       },
       fontSize: {
-        // Headlines (Desktop)
         "h1-d": ["48px", { lineHeight: "150%" }],
         "h2-d": ["38px", { lineHeight: "150%" }],
         "h3-d": ["34px", { lineHeight: "150%" }],
-        // Headlines (Mobile)
         "h1-m": ["32px", { lineHeight: "150%" }],
         "h2-m": ["28px", { lineHeight: "150%" }],
         "h3-m": ["24px", { lineHeight: "150%" }],
-        // Titles (Desktop)
         "title1-d": ["28px", { lineHeight: "150%" }],
         "title2-d": ["24px", { lineHeight: "150%" }],
         "title3-d": ["22px", { lineHeight: "150%" }],
         "subtitle": ["15px", { lineHeight: "150%" }],
         "overline": ["15px", { lineHeight: "150%" }],
-        // Titles (Mobile)
         "title1-m": ["22px", { lineHeight: "150%" }],
         "title2-m": ["20px", { lineHeight: "150%" }],
         "title3-m": ["18px", { lineHeight: "150%" }],
-        // Body
         "body1": ["18px", { lineHeight: "150%" }],
         "body2": ["16px", { lineHeight: "150%" }],
         "body3": ["14px", { lineHeight: "150%" }],
         "caption": ["12px", { lineHeight: "150%" }],
       },
       colors: {
-        primary: { DEFAULT: "#6A0DAD", foreground: "hsl(var(--primary-foreground))" },
-        secondary: { DEFAULT: "#FF9800", foreground: "hsl(var(--secondary-foreground))" },
-        accent: { DEFAULT: "#03A9F4", foreground: "hsl(var(--accent-foreground))" },
-        neutral: "#F5F5F5",
-        muted: { DEFAULT: "#9E9E9E", foreground: "hsl(var(--muted-foreground))" },
-        destructive: { DEFAULT: "#D32F2F", foreground: "hsl(var(--destructive-foreground))" },
-        background: "#FFFFFF",
-        foreground: "#000000",
-        border: "#E6E6E6",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        card: { DEFAULT: "hsl(var(--card))", foreground: "hsl(var(--card-foreground))" },
-        popover: { DEFAULT: "hsl(var(--popover))", foreground: "hsl(var(--popover-foreground))" },
-        chart: {
-          "1": "hsl(var(--chart-1))",
-          "2": "hsl(var(--chart-2))",
-          "3": "hsl(var(--chart-3))",
-          "4": "hsl(var(--chart-4))",
-          "5": "hsl(var(--chart-5))"
+        // 🎨 🎯 BUTTONS STYLES
+        button: {
+          primary: {
+            DEFAULT: "#823B79",
+            hover: "#62205A", 
+            pressed: "#4C1545",
+            disabled: "#E7E7E7",
+          },
+          secondary: {
+            DEFAULT: "#FFFEFD",
+            secondary: "#823B79", 
+            hover: "#62205A", 
+            pressed: "#4C1545",
+            disabled: "#E7E7E7",
+          },
+          tertiary: {
+            DEFAULT: "#FFFEFD",
+            hover: "#F3EDE4", 
+            pressed: "#CDC4B6",
+            disabled: "#E7E7E7",
+          },
         },
+        // 🎨 🎯 TEXT COLORS
+        text: {
+          primary: "#3F0C38",
+          secondary: "#7D7F7F",
+          tertiary: "#383A3A",
+          disabled: "#A0A1A1",
+          alternative: "#FFFEFD",
+          success: "#38862C",
+          info: "#005F79",
+          warning: "#BC560A",
+          error: "#A10833",
+        },
+
+        // 🎨 🎯 BACKGROUND COLORS
+        background: {
+          primary: "#FFFEFD",
+          secondary: "#3F0C38",
+          surface: "#F5F8F8",
+          elevated: "#FFFEFD",
+          success: "62205A",
+          info: "#EDFBFF",
+          warning: "#FFF6EC",
+          error: "#FFF5F8",
+        },
+
+        // 🎨 🎯 BORDER COLORS
+        border: {
+          default: "#E7E7E7",
+          hover: "#A0A1A1",
+          active: "#62205A",
+          success: "#61C851",
+          info: "#00C3FF",
+          warning: "#E4963E",
+          error: "#E50C4A",
+        },
+
+        // 🎨 🎯 OTHER COMPONENT COLORS
+        input: "#F4F8F8",
+        ring: "#621F59",
         sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))"
-        }
+          DEFAULT: "#FAFAFA",
+          foreground: "#333333",
+          primary: "#6A0DAD",
+          "primary-foreground": "#FFFFFF",
+          accent: "#03A9F4",
+          "accent-foreground": "#FFFFFF",
+          border: "#E6E6E6",
+          ring: "#621F59"
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -8,7 +8,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, state = "default", disabled, ...props }, ref) => {
     const baseStyles =
-      "h-14 px-6 py-4 w-full rounded-md text-base font-medium focus-visible:outline-none transition-all";
+      "h-12 px-6 py-4 w-full rounded-md text-base font-medium focus-visible:outline-none transition-all";
 
     const stateStyles = {
       default: "border-2 border-[#E6E6E6] bg-white text-[#7D7F7F]",

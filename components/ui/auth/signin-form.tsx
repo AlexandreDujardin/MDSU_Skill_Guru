@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import Link from 'next/link';
-import { AuthLayout } from '@/components/ui/AuthLayout';
+import { AuthLayout } from '@/components/ui/auth/AuthLayout';
 import { Eye, EyeOff } from 'lucide-react';
 
 export default function SignInForm() {
@@ -48,7 +48,7 @@ export default function SignInForm() {
   return (
     <AuthLayout imageSrc="/images/auth/image-background-connexion.svg">
       <h2 className="text-2xl font-bold mb-4">Connexion</h2>
-      <p className="mb-6 text-gray-600">
+      <p className="mb-6 text-text-primary">
         Veuillez renseigner votre email et mot de passe pour accéder à votre espace Skill Guru.
       </p>
       <form onSubmit={handleSignIn} className="space-y-4">
@@ -61,7 +61,7 @@ export default function SignInForm() {
           <Label>Email professionnel*</Label>
           <Input
             type="email"
-            placeholder="Votre email"
+            placeholder="Email professionnel"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -72,7 +72,7 @@ export default function SignInForm() {
           <div className="relative">
             <Input
               type={showPassword ? 'text' : 'password'}
-              placeholder="Votre mot de passe"
+              placeholder="Mot de passe"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
