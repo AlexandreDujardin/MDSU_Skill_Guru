@@ -17,13 +17,6 @@ export function AuthLayout({
           alt="Auth Step Background"
           className="h-full object-cover"
         />
-
-        {/* Button inside the image */}
-        <div className="justify-center absolute inset-x-0 bottom-10 flex">
-          <Button type='tertiary'>
-            Découvrir Skill Guru
-          </Button>
-        </div>
       </div>
 
       {/* Right Form Section - Centered both vertically & horizontally */}

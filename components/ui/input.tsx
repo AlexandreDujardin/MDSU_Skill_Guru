@@ -11,7 +11,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       "h-12 px-6 py-4 w-full rounded-md text-base font-medium focus-visible:outline-none transition-all";
 
     const stateStyles = {
-      default: "border-2 border-[#E6E6E6] bg-white text-[#7D7F7F]",
+      default: "border-2 border-[#E6E6E6] bg-white text-[#7D7F7F] text-text-tertiary",
       hover: "border-2 border-[#9FA1A1] bg-[#FFFDFC] text-[#7D7F7F]",
       focus: "border-2 border-[#621F59] bg-[#F4F8F8] text-[#383939]",
       error: "border-2 border-[#E50C4A] bg-white text-[#383939]",

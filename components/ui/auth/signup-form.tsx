@@ -68,7 +68,7 @@ export default function SignUpForm() {
       imageSrc={step === 1 ? "/images/auth/image-background-connexion-etape-1.svg" : "/images/auth/image-background-connexion-etape-2.svg"}
     >
       <div className="max-w-lg mx-auto">
-        <h2 className="text-2xl font-bold text-text-primary mb-2">Créer un compte</h2>
+        <h2 className="text-4xl font-bold text-text-primary mb-2">Créer un compte</h2>
         <p className="text-text-primary mb-6">
           {step === 1
             ? "Afin de souscrire à un abonnement, vous devez d’abord créer un compte sur notre plateforme."
@@ -128,7 +128,7 @@ export default function SignUpForm() {
             {/* Next Button (Aligned Right) */}
             <div className="flex justify-end">
               <Button onClick={handleNextStep} className="flex items-center gap-2">
-                Suivant <ChevronRight size={18} />
+                Je m'inscris <ChevronRight size={18} />
               </Button>
             </div>
           </div>
