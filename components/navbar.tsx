@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { createClient } from '@/utils/supabase/client';
 import { logout } from '@/app/actions';
-import { ChevronDown, Search } from 'lucide-react';
+import { Bell, ChevronDown, Search, User } from 'lucide-react';
 
 export function Navbar() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -19,10 +19,10 @@ export function Navbar() {
       if (session?.user) {
         setIsAuthenticated(true);
 
-        // Fetch user profile (avatar & first_login)
+        // Fetch user avatar from profile if available
         const { data: profile } = await supabase
           .from('profiles')
-          .select('avatar_url, first_login')
+          .select('avatar_url')
           .eq('id', session.user.id)
           .single();
 
@@ -34,35 +34,33 @@ export function Navbar() {
   }, []);
 
   return (
-    <>
-      {/* Navigation Bar */}
-      <nav className="fixed top-0 left-0 w-full h-16 bg-white shadow flex items-center px-6 z-10">
-        {/* Logo */}
-        <Link href="/" className="flex-shrink-0">
-          <img src="/images/logo_brand.svg" alt="Skill Guru Logo" className="h-10" />
-        </Link>
+    <nav className="fixed top-0 left-0 w-full h-16 bg-white shadow-md flex items-center px-6 z-50">
+      {/* Logo */}
+      <Link href="/" className="flex-shrink-0">
+        <img src="/images/logo_brand.svg" alt="Skill Guru Logo" className="h-10" />
+      </Link>
 
-        {/* Search Bar */}
-        <div className="flex flex-grow justify-center mx-8">
-          <div className="relative w-full max-w-md">
-            <input
-              type="text"
-              placeholder="Rechercher"
-              className="w-full h-12 pl-4 pr-10 border border-gray-300 rounded-md text-text-primary focus:border-primary focus:ring-primary focus:outline-none"
-            />
-            <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500" size={18} />
-          </div>
+      {/* Search Bar */}
+      <div className="flex flex-grow justify-center mx-8">
+        <div className="relative w-full max-w-md">
+          <input
+            type="text"
+            placeholder="Rechercher"
+            className="w-full h-12 pl-4 pr-10 border border-gray-300 rounded-md text-text-primary focus:border-primary focus:ring-primary focus:outline-none"
+          />
+          <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500" size={18} />
         </div>
+      </div>
 
-        {/* User Actions */}
-        <div className="flex items-center space-x-6">
-          {/* Notifications */}
-          <button className="relative p-2 border border-border-active rounded-md hover:bg-primary/10">
-            <img src="/images/icons/bell.svg" alt="Notification" className="h-6" />
-            <span className="absolute top-0 right-0 bg-red-600 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
-              0
-            </span>
-          </button>
+      {/* Notification & Account */}
+      <div className="flex items-center space-x-6">
+        {/* Notification Icon */}
+        <button className="relative p-2 border border-border-active rounded-md hover:bg-primary/10">
+          <img src="/images/icons/bell.svg" alt="Notification" className="h-6" />
+          <span className="absolute top-0 right-0 bg-red-600 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+            0
+          </span>
+        </button>
 
           {/* User Account */}
           {isAuthenticated ? (
@@ -80,6 +78,9 @@ export function Navbar() {
           )}
         </div>
       </nav>
+
+      {/* Preferences Modal (Only Shows on First Login) */}
+      {showPreferences && <PreferencesSheet open={showPreferences} onClose={() => setShowPreferences(false)} />}
     </>
   );
 }

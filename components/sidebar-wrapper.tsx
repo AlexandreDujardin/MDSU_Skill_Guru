@@ -10,11 +10,11 @@ import {
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { createClient } from "@/utils/supabase/client";
-import { ChevronLeft, ChevronRight } from "lucide-react"; // Icons for toggling sidebar
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export function SidebarWrapper({ children }: { children: React.ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isCollapsed, setIsCollapsed] = useState(false); // Sidebar collapse state
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   useEffect(() => {
     const supabase = createClient();
@@ -29,20 +29,11 @@ export function SidebarWrapper({ children }: { children: React.ReactNode }) {
 
   return (
     <SidebarProvider>
-      <div className="flex">
-        {/* Sidebar */}
-        <Sidebar className={`transition-all duration-300 ${isCollapsed ? "w-16" : "w-64"}`}>
-          {/* Sidebar Header with Toggle Button */}
+        {/* Sidebar - Positioned Below Navbar */}
+        <Sidebar 
+          className={`fixed left-0 top-16 transition-all duration-300 ${isCollapsed ? "w-28" : "w-64"} h-[calc(100vh-4rem)] shadow-lg`}>
+          {/* Sidebar Header with Toggle */}
           <SidebarHeader className="flex justify-between items-center py-4 px-3">
-            {!isCollapsed && (
-              <Link href="/" className="block">
-                <img
-                  src="/images/logo_brand.svg"
-                  alt="Skill Guru Logo"
-                  className="h-12 w-auto transition-all duration-300"
-                />
-              </Link>
-            )}
             <button
               onClick={() => setIsCollapsed(!isCollapsed)}
               className="p-2 rounded-md hover:bg-gray-200"
@@ -52,90 +43,121 @@ export function SidebarWrapper({ children }: { children: React.ReactNode }) {
           </SidebarHeader>
 
           {/* Sidebar Content */}
-          <SidebarContent className="flex flex-col space-y-2">
-            {!isAuthenticated && (
-              <Link href="/signin" className="flex items-center p-4 hover:bg-gray-100">
-                <img
-                  src="/images/icons/dashboard.svg"
-                  alt="Dashboard"
-                  className="h-6 w-6"
-                />
+          <SidebarContent className="flex space-y-2 text-border-default">
+            {isAuthenticated ? (
+              <>
+                {isCollapsed ? (
+                <div className="text-center">
+                  <Link href="/" className="flex flex-col items-center p-4 hover:border-border-default hover:border-l-4 focus:border-l-4 border-border-default">
+                    <img src="/images/icons/home.svg" alt="Accueil" className="h-6 w-6 " />
+                    <span>Accueil</span>
+                  </Link>
+
+                  <Link href="/catalog" className="flex flex-col items-center p-4 hover:border-border-default hover:border-l-4 focus:border-l-4 border-border-default">
+                    <img src="/images/icons/catalog.svg" alt="Catalogue" className="h-6 w-6" />
+                    <span>Catalogue</span>
+                  </Link>
+
+                  <Link href="/playlists" className="flex flex-col items-center p-4 hover:border-border-default hover:border-l-4 focus:border-l-4 border-border-default">
+                    <img src="/images/icons/playlists.svg" alt="Playlists" className="h-6 w-6" />
+                    <span>Playlists de jeux</span>
+                  </Link>
+                  
+                  <hr />
+                  
+                  <Link href="/classes" className="flex flex-col items-center p-4 hover:border-border-default hover:border-l-4 focus:border-l-4 border-border-default">
+                    <img src="/images/icons/classes.svg" alt="Classes" className="h-6 w-6"/>
+                    <span>Mes classes</span>
+                  </Link>
+
+                  <Link href="/suivi" className="flex flex-col items-center p-4 hover:border-border-default hover:border-l-4 focus:border-l-4 border-border-default">
+                    <img src="/images/icons/suivi.svg" alt="Suivi pédagogique" className="h-6 w-6"/>
+                    <span>Suivi pédagogique</span>
+                  </Link>
+
+                  <hr />
+
+                  <Link href="/support" className="flex flex-col items-center p-4 hover:border-border-default hover:border-l-4 focus:border-l-4 border-border-default">
+                    <img src="/images/icons/help.svg" alt="Support" className="h-6 w-6"/>
+                    <span>Support technique</span>
+                  </Link>
+                </div>
+                
+              ) : (
+                <div className="flex flex-col justify-evenly space-y-4 gap-4">
+                  <Link href="/" className="flex items-center p-4 hover:border-border-default hover:border-l-4 focus:border-l-4 border-border-default">
+                    <img src="/images/icons/home.svg" alt="Accueil" className="h-6 w-6" />
+                    <span className="ml-3">Accueil</span>
+                  </Link>
+
+                  <Link href="/catalog" className="flex items-center p-4 hover:border-border-default hover:border-l-4 focus:border-l-4 border-border-default">
+                    <img src="/images/icons/catalog.svg" alt="Catalogue" className="h-6 w-6" />
+                    <span className="ml-3">Catalogue</span>
+                  </Link>
+
+                  <Link href="/playlists" className="flex items-center p-4 hover:border-border-default hover:border-l-4 focus:border-l-4 border-border-default">
+                    <img src="/images/icons/playlists.svg" alt="Playlists" className="h-6 w-6" />
+                    <span className="ml-3">Playlists de jeux</span>
+                  </Link>
+                  
+                  <hr />
+                  
+                  <Link href="/classes" className="flex items-center p-4 hover:border-border-default hover:border-l-4 focus:border-l-4 border-border-default">
+                    <img src="/images/icons/classes.svg" alt="Classes" className="h-6 w-6"/>
+                    <span className="ml-3">Mes classes</span>
+                  </Link>
+
+                  <Link href="/suivi" className="flex items-center p-4 hover:border-border-default hover:border-l-4 focus:border-l-4 border-border-default">
+                    <img src="/images/icons/suivi.svg" alt="Suivi pédagogique" className="h-6 w-6"/>
+                    <span className="ml-3">Suivi pédagogique</span>
+                  </Link>
+
+                  <hr />
+
+                  <Link href="/support" className="flex items-center p-4 hover:border-border-default hover:border-l-4 focus:border-l-4 border-border-default">
+                    <img src="/images/icons/help.svg" alt="Support" className="h-6 w-6"/>
+                    <span className="ml-3">Support technique</span>
+                  </Link>
+                </div>
+              )}
+                
+              </>
+            ) : (
+              <Link href="/signin" className="flex items-center p-4 hover:border-border-default hover:border-l-4 focus:border-l-4 border-border-default">
+                <img src="/images/icons/dashboard.svg" alt="Dashboard" className="h-6 w-6" />
                 {!isCollapsed && <span className="ml-3">Dashboard</span>}
               </Link>
-            )}
-
-            {isAuthenticated && (
-              <>
-                <Link href="/" className="flex items-center p-4 hover:bg-gray-100">
-                  <img
-                    src="/images/icons/home.svg"
-                    alt="Accueil"
-                    className="h-6 w-6"
-                  />
-                  {!isCollapsed && <span className="ml-3">Accueil</span>}
-                </Link>
-
-                <Link href="/catalog" className="flex items-center p-4 hover:bg-gray-100">
-                  <img
-                    src="/images/icons/catalog.svg"
-                    alt="Catalogue"
-                    className="h-6 w-6"
-                  />
-                  {!isCollapsed && <span className="ml-3">Gurulogue</span>}
-                </Link>
-
-                <Link href="/playlists" className="flex items-center p-4 hover:bg-gray-100">
-                  <img
-                    src="/images/icons/playlists.svg"
-                    alt="Playlists"
-                    className="h-6 w-6"
-                  />
-                  {!isCollapsed && <span className="ml-3">Playlist de jeux</span>}
-                </Link>
-
-                <Link href="/classes" className="flex items-center p-4 hover:bg-gray-100">
-                  <img
-                    src="/images/icons/classes.svg"
-                    alt="Classes"
-                    className="h-6 w-6"
-                  />
-                  {!isCollapsed && <span className="ml-3">Classes</span>}
-                </Link>
-
-                <Link href="/suivi" className="flex items-center p-4 hover:bg-gray-100">
-                  <img
-                    src="/images/icons/suivi.svg"
-                    alt="Suivi pédagogique"
-                    className="h-6 w-6"
-                  />
-                  {!isCollapsed && <span className="ml-3">Suivi pédagogique</span>}
-                </Link>
-
-                <Link href="/support" className="flex items-center p-4 hover:bg-gray-100">
-                  <img
-                    src="/images/icons/help.svg"
-                    alt="Support"
-                    className="h-6 w-6"
-                  />
-                  {!isCollapsed && <span className="ml-3">Support</span>}
-                </Link>
-              </>
             )}
           </SidebarContent>
 
           {/* Sidebar Footer */}
           <SidebarFooter>
             <hr />
-            <div className="items-center justify-center flex flex-col">
-              {!isCollapsed && <p className="text-xs text-gray-500 mt-4">V0.1</p>}
-              <p className="text-xs text-gray-500 mt-4">© 2025 Skill Guru</p>
-            </div>
+              {isCollapsed ? (
+                <div className="items-center justify-center flex flex-col text-text-alternative text-xs gap-2">
+                  <img src="images/icon-poulp.svg" alt="logo" className="w-10" />
+                  <div className="flex flex-col gap-1 text-center">
+                    <p>Skill Guru - </p>
+                    <p className="underline">Tous droits réservés</p>
+                  </div>
+                  <a href="#" className="underline">Mentions légales</a>
+                </div>
+                
+              ) : (
+                <div className="items-center justify-center flex flex-col text-text-alternative text-xs gap-2">
+                  <img src="images/logo_brand_white.svg" alt="logo" />
+                  <div className="flex flex-row items-center">
+                    <p>Skill Guru - </p>
+                    <p className="underline">Tous droits réservés</p>
+                  </div>
+                  <a href="#" className="underline">Mentions légales</a>
+                </div>
+              )}
           </SidebarFooter>
         </Sidebar>
 
-        {/* Main Content */}
-        <main className="flex-1 p-6 bg-gray-50 overflow-auto">{children}</main>
-      </div>
+        {/* Main Content - Adjusting for Sidebar and Navbar */}
+        <main className="flex-1 p-6 bg-gray-50 overflow-auto ml-64 mt-16">{children}</main>
     </SidebarProvider>
   );
 }
