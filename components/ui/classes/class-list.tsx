@@ -2,6 +2,8 @@
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { AddStudentForm } from './add-student-form';
 import { EditClassForm } from './edit-class-form';
 import { EditStudentForm } from './edit-student-form';
@@ -16,68 +18,42 @@ interface Student {
 interface Class {
   id: string;
   name: string;
+  niveau_classe: string;
+  annee_promotion: string;
+  nom_ecole: string;
   students: Student[];
 }
 
-interface ClassListProps {
-  classes: Class[];
-}
-
-export function ClassList({ classes }: ClassListProps) {
+export function ClassList({ classes }: { classes: Class[] }) {
   return (
-    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div className="flex flex-col space-y-4">
       {classes.map((classItem) => (
-        <Card key={classItem.id}>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <div className="flex items-center gap-2">
-              <CardTitle className="text-xl font-bold">{classItem.name}</CardTitle>
-              <EditClassForm classId={classItem.id} initialName={classItem.name} />
-            </div>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-destructive"
-              onClick={() => deleteClass(classItem.id)}
-            >
-              Supprimer
-            </Button>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
+        <Link href={`/classes/${classItem.id}`} key={classItem.id} passHref>
+          <Card className="flex flex-row space-y-4 cursor-pointer hover:shadow-lg transition-shadow">
+            <CardHeader className="flex flex-col space-y-2 pb-2">
               <div className="flex justify-between items-center">
-                <h3 className="font-semibold">Élèves ({classItem.students.length})</h3>
-                <AddStudentForm classId={classItem.id} />
+                <div>
+                  <CardTitle className="h3-d">{classItem.name}</CardTitle>
+                  <p className="text-sm text-muted-foreground">{classItem.niveau_classe} • {classItem.annee_promotion}</p>
+                </div>
+                <EditClassForm classId={classItem.id} initialName={classItem.name} />
               </div>
-              <div className="space-y-2">
-                {classItem.students.map((student) => (
-                  <div
-                    key={student.id}
-                    className="flex items-center justify-between py-2 border-b last:border-0"
-                  >
-                    <span>
-                      {student.first_name} {student.last_name}
-                    </span>
-                    <div className="flex gap-2">
-                      <EditStudentForm
-                        studentId={student.id}
-                        initialFirstName={student.first_name}
-                        initialLastName={student.last_name}
-                      />
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="text-destructive"
-                        onClick={() => deleteStudent(student.id)}
-                      >
-                        Supprimer
-                      </Button>
-                    </div>
-                  </div>
-                ))}
+              <div className="flex justify-between items-center">
+                <span className="bg-button-primary text-text-alternative text-sm rounded-xl px-4 py-1 min-w-fit justify-center items-center flex gap-2">
+                  <img src="/images/classes/icon.svg" alt="ecole" className="h-4"/>
+                  {classItem.nom_ecole}
+                </span>
               </div>
-            </div>
-          </CardContent>
-        </Card>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="flex-row justify-between items-center">
+                  <h3 className="font-semibold">{classItem.students.length} élèves</h3>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
       ))}
     </div>
   );

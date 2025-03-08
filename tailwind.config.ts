@@ -73,7 +73,7 @@ const config: Config = {
         background: {
           primary: "#FFFEFD",
           secondary: "#3F0C38",
-          surface: "#F5F8F8",
+          surface: "#FBF9F7",
           elevated: "#FFFEFD",
           success: "62205A",
           info: "#EDFBFF",

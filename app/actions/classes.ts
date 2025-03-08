@@ -6,6 +6,9 @@ import { revalidatePath } from 'next/cache'
 export async function addClass(formData: FormData) {
   const supabase = createClient();
   const name = formData.get('name') as string;
+  const nom_ecole = formData.get('nom_ecole') as string;
+  const niveau_classe = formData.get('niveau_classe') as string;
+  const annee_promotion = formData.get('annee_promotion') as string;
 
   const { data: { session }, error: sessionError } = await supabase.auth.getSession();
 
@@ -16,6 +19,9 @@ export async function addClass(formData: FormData) {
     .from('classes')
     .insert({
       name,
+      nom_ecole,
+      niveau_classe,
+      annee_promotion,
       user_id: session.user.id, // Include the authenticated user's ID
     });
 

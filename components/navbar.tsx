@@ -6,12 +6,10 @@ import { Button } from '@/components/ui/button';
 import { createClient } from '@/utils/supabase/client';
 import { logout } from '@/app/actions';
 import { ChevronDown, Search } from 'lucide-react';
-import { PreferencesSheet } from '@/components/ui/onboarding/PreferencesSheet';
 
 export function Navbar() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userAvatar, setUserAvatar] = useState<string | null>(null);
-  const [showPreferences, setShowPreferences] = useState(false);
   const supabase = createClient();
 
   useEffect(() => {
@@ -29,11 +27,6 @@ export function Navbar() {
           .single();
 
         setUserAvatar(profile?.avatar_url || null);
-
-        // If first login is true, show the preferences modal
-        if (profile?.first_login) {
-          setShowPreferences(true);
-        }
       }
     };
 
@@ -87,9 +80,6 @@ export function Navbar() {
           )}
         </div>
       </nav>
-
-      {/* Preferences Modal (Only Shows on First Login) */}
-      {showPreferences && <PreferencesSheet open={showPreferences} onClose={() => setShowPreferences(false)} />}
     </>
   );
 }

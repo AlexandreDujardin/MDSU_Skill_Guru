@@ -4,6 +4,7 @@ import { SidebarWrapper } from "@/components/sidebar-wrapper";
 import { usePathname } from "next/navigation";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Navbar } from "@/components/navbar";
+import { PageLayout } from "@/components/PageLayout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
