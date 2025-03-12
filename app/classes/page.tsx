@@ -30,12 +30,8 @@ export default async function ClassesPage() {
 
 
   return (
-    <PageLayout>
-      <div className="flex justify-between items-center mb-8 bg-background-surface p-4 rounded-md">
-        <h1 className="text-2xl font-bold">Mes Classes</h1>
-        <AddClassForm />
-      </div>
+    <div>
       <ClassList classes={classes || []} />
-    </PageLayout>
+    </div>
   );
 }

@@ -62,25 +62,21 @@ export function Navbar() {
           </span>
         </button>
 
-          {/* User Account */}
-          {isAuthenticated ? (
-            <Button type='primary'>
-              <Link href="/account" className="flex justify-evenly items-center text-white px-4 py-2 rounded-md gap-2">
-                <img src="/images/icons/account.svg" alt="Mon compte" className="h-6" />
-                Mon compte
-                <ChevronDown size={18} />
-              </Link>
-            </Button>
-          ) : (
-            <Button asChild>
-              <Link href="/auth/sign-in">Connexion</Link>
-            </Button>
-          )}
-        </div>
-      </nav>
-
-      {/* Preferences Modal (Only Shows on First Login) */}
-      {showPreferences && <PreferencesSheet open={showPreferences} onClose={() => setShowPreferences(false)} />}
-    </>
+        {/* Account Button */}
+        {isAuthenticated ? (
+          <Button type='primary'>
+            <Link href="/account" className="flex justify-evenly items-center text-white px-4 py-2 rounded-md gap-2">
+              <img src="/images/icons/account.svg" alt="Mon compte" className="h-6" />
+              Mon compte
+              <ChevronDown size={18} />
+            </Link>
+          </Button>
+        ) : (
+          <Button asChild>
+            <Link href="/auth/sign-in">Connexion</Link>
+          </Button>
+        )}
+      </div>
+    </nav>
   );
 }

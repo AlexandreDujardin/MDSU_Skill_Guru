@@ -135,7 +135,7 @@ export function SidebarWrapper({ children }: { children: React.ReactNode }) {
             <hr />
               {isCollapsed ? (
                 <div className="items-center justify-center flex flex-col text-text-alternative text-xs gap-2">
-                  <img src="images/icon-poulp.svg" alt="logo" className="w-10" />
+                  <img src="/images/icon-poulp.svg" alt="logo" className="w-10" />
                   <div className="flex flex-col gap-1 text-center">
                     <p>Skill Guru - </p>
                     <p className="underline">Tous droits réservés</p>
@@ -145,7 +145,7 @@ export function SidebarWrapper({ children }: { children: React.ReactNode }) {
                 
               ) : (
                 <div className="items-center justify-center flex flex-col text-text-alternative text-xs gap-2">
-                  <img src="images/logo_brand_white.svg" alt="logo" />
+                  <img src="/images/logo_brand_white.svg" alt="logo" />
                   <div className="flex flex-row items-center">
                     <p>Skill Guru - </p>
                     <p className="underline">Tous droits réservés</p>
@@ -157,7 +157,7 @@ export function SidebarWrapper({ children }: { children: React.ReactNode }) {
         </Sidebar>
 
         {/* Main Content - Adjusting for Sidebar and Navbar */}
-        <main className="flex-1 p-6 bg-gray-50 overflow-auto ml-64 mt-16">{children}</main>
+        <main className="flex-1 p-6 bg-gray-50 overflow-auto mt-16">{children}</main>
     </SidebarProvider>
   );
 }

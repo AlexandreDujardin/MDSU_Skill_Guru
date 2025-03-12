@@ -24,30 +24,32 @@ export function AddStudentForm({ classId }: AddStudentFormProps) {
   const [students, setStudents] = useState<{ id: string; firstName: string; lastName: string }[]>([]);
   const [nextStudentId, setNextStudentId] = useState(1);
 
-  // Récupérer le nom de la classe et le dernier ID d'élève existant
+  // Fetch class details & latest student ID when modal is opened
   useEffect(() => {
     async function fetchClassData() {
-      const { data: classData } = await supabase
-        .from('classes')
-        .select('name')
-        .eq('id', classId)
-        .single();
+      if (!classId) return;
 
-      if (classData) {
-        setClassName(classData.name);
-      }
+      try {
+        // Fetch class details
+        const { data: classData } = await supabase
+          .from('classes')
+          .select('name')
+          .eq('id', classId)
+          .maybeSingle();
 
-      const { data: lastStudent } = await supabase
-        .from('students')
-        .select('custom_id')
-        .eq('class_id', classId)
-        .order('custom_id', { ascending: false })
-        .limit(1)
-        .single();
+        setClassName(classData?.name || "Classe inconnue");
 
-      if (lastStudent) {
-        setNextStudentId(parseInt(lastStudent.custom_id) + 1);
-      } else {
+        // Fetch last student ID
+        const { data: lastStudent } = await supabase
+          .from('students')
+          .select('custom_id')
+          .eq('class_id', classId)
+          .order('created_at', { ascending: false })
+          .limit(1)
+          .maybeSingle();
+
+        setNextStudentId(lastStudent?.custom_id ? parseInt(lastStudent.custom_id) + 1 : 1);
+      } catch {
         setNextStudentId(1);
       }
     }
@@ -57,26 +59,19 @@ export function AddStudentForm({ classId }: AddStudentFormProps) {
     }
   }, [open, classId]);
 
-  // Ajouter un élève avec ID automatique
+  // Add a new student with auto-generated ID
   const handleAddStudentField = () => {
     setStudents([...students, { id: nextStudentId.toString().padStart(5, '0'), firstName: '', lastName: '' }]);
-    setNextStudentId((prev) => prev + 1);
-  };
-
-  const handleRemoveStudentField = (index: number) => {
-    setStudents(students.filter((_, i) => i !== index));
-  };
-
-  const handleInputChange = (index: number, field: 'firstName' | 'lastName', value: string) => {
-    const updatedStudents = [...students];
-    updatedStudents[index][field] = value;
-    setStudents(updatedStudents);
+    setNextStudentId(prev => prev + 1);
   };
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant="outline" size="sm">Ajouter des élèves</Button>
+        <Button type='secondary' size="lg">
+          <img src="/images/classes/add.svg" alt="ajouter" />
+          Créer des profils élèves
+        </Button>
       </SheetTrigger>
       <SheetContent side="right" className="overflow-y-auto max-h-screen">
         <SheetHeader>
@@ -84,24 +79,18 @@ export function AddStudentForm({ classId }: AddStudentFormProps) {
         </SheetHeader>
         <hr />
 
-        {/* Tabs pour choisir entre "Ajouter manuellement" et "Charger une liste" */}
         <Tabs defaultValue="manual" className="mt-4">
           <TabsList className="flex border-b">
-            <TabsTrigger 
-              value="manual" 
-              className="w-1/2 text-center gap-2">
-                <img src="/images/classes/pen.svg" alt="ajouter" />
-                Ajouter manuellement
-              </TabsTrigger>
-            <TabsTrigger 
-              value="upload"  
-              className="w-1/2 text-center gap-2">
-                <img src="/images/classes/add.svg" alt="charger" />
-                Charger une liste
-              </TabsTrigger>
+            <TabsTrigger value="manual" className="w-1/2 text-center gap-2">
+              <img src="/images/classes/pen.svg" alt="ajouter" />
+              Ajouter manuellement
+            </TabsTrigger>
+            <TabsTrigger value="upload" className="w-1/2 text-center gap-2">
+              <img src="/images/classes/add.svg" alt="charger" />
+              Charger une liste
+            </TabsTrigger>
           </TabsList>
 
-          {/* Onglet : Ajouter manuellement */}
           <TabsContent value="manual" className="mt-4">
             <form
               action={async (formData) => {
@@ -112,7 +101,7 @@ export function AddStudentForm({ classId }: AddStudentFormProps) {
               }}
               className="space-y-4 mt-6"
             >
-              {/* Affichage du nom de la classe */}
+              {/* Display Class Name */}
               <div>
                 <Label>Rattacher à la classe</Label>
                 <Input value={className} disabled />
@@ -128,9 +117,12 @@ export function AddStudentForm({ classId }: AddStudentFormProps) {
                     <Label htmlFor={`firstName-${index}`}>Prénom</Label>
                     <Input
                       id={`firstName-${index}`}
-                      name={`firstName-${index}`}
                       value={student.firstName}
-                      onChange={(e) => handleInputChange(index, 'firstName', e.target.value)}
+                      onChange={(e) => {
+                        const updatedStudents = [...students];
+                        updatedStudents[index].firstName = e.target.value;
+                        setStudents(updatedStudents);
+                      }}
                       required
                     />
                   </div>
@@ -138,38 +130,26 @@ export function AddStudentForm({ classId }: AddStudentFormProps) {
                     <Label htmlFor={`lastName-${index}`}>Nom</Label>
                     <Input
                       id={`lastName-${index}`}
-                      name={`lastName-${index}`}
                       value={student.lastName}
-                      onChange={(e) => handleInputChange(index, 'lastName', e.target.value)}
+                      onChange={(e) => {
+                        const updatedStudents = [...students];
+                        updatedStudents[index].lastName = e.target.value;
+                        setStudents(updatedStudents);
+                      }}
                       required
                     />
                   </div>
-                  {index > 0 && (
-                    <Button
-                      type="button"
-                      variant="destructive"
-                      size="sm"
-                      onClick={() => handleRemoveStudentField(index)}
-                    >
-                      Supprimer
-                    </Button>
-                  )}
                 </div>
               ))}
 
-              <Button type="button" variant="secondary" onClick={handleAddStudentField}>
-                + Ajouter un autre élève
-              </Button>
-              <Button type="submit" className="w-full">Valider</Button>
+              <div className='flex justify-end gap-2'>
+                <Button type="secondary" variant="secondary" onClick={handleAddStudentField}>
+                  <img src="/images/classes/add.svg" alt="ajouter" />
+                  Ajouter un autre élève
+                </Button>
+                <Button type="primary">Valider</Button>
+              </div>
             </form>
-          </TabsContent>
-
-          {/* Onglet : Charger une liste (Juste du front, sans logique pour l'import) */}
-          <TabsContent value="upload" className="mt-4">
-            <div className="p-4 border rounded-lg bg-gray-100 text-center">
-              <p className="text-lg text-gray-600">🚀 Fonctionnalité à venir !</p>
-              <p className="text-sm text-muted-foreground">Bientôt, vous pourrez importer une liste d'élèves.</p>
-            </div>
           </TabsContent>
         </Tabs>
       </SheetContent>
