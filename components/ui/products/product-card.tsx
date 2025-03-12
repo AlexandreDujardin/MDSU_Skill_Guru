@@ -43,10 +43,41 @@ export function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <Card className="flex flex-col">
+    <Card 
+      onClick={!loading ? handleSubscribe : undefined}
+      className="flex flex-col bg-background-surface cursor-pointer transition-all duration-200 rounded-lg hover:bg-border-hover"  
+    >
       <CardHeader>
-        <CardTitle>{product.name}</CardTitle>
-        <CardDescription>{product.description}</CardDescription>
+        <CardDescription className="inline-flex bg-button-primary text-text-alternative rounded-xl px-4 py-1 min-w-fit">{product.description}</CardDescription>
+        <CardTitle className="text-text-secondary">{product.name}</CardTitle>
+        {/* Display Price (Always Monthly) */}
+        <div className="text-2xl font-bold">
+          {new Intl.NumberFormat("fr-FR", {
+            style: "currency",
+            currency: currency,
+          }).format(
+            product.default_price.recurring?.interval === "month"
+              ? amount // Keep monthly price
+              : amount / 12 // Convert yearly to monthly
+          )}
+
+          <span className="text-2xl font-normal text-muted-foreground"> /mois</span>
+        </div>
+
+        {/* Converted Price (Always Yearly) */}
+        <div className="text-sm text-gray-500">
+          <span>Soit </span>
+          {new Intl.NumberFormat("fr-FR", {
+            style: "currency",
+            currency: currency,
+          }).format(
+            product.default_price.recurring?.interval === "month"
+              ? amount * 12 // Convert monthly to yearly
+              : amount // Keep yearly price
+          )}
+
+          <span> à l'année</span>
+        </div>
       </CardHeader>
       <CardContent className="flex-1">
         {product.images?.[0] && (
@@ -58,9 +89,9 @@ export function ProductCard({ product }: ProductCardProps) {
             />
           </div>
         )}
-        <div className="space-y-2">
+        <div className="space-y-2 pt-4 pb-4">
         {product.features?.map((feature, index) => (
-          <div key={index} className="flex items-center">
+          <div key={index} className="inline-flex items-center border border-border-active rounded-2xl px-3 py-1 min-w-fit">
             <CheckIcon className="mr-2 h-4 w-4" />
             <span>{typeof feature === "string" ? feature : feature.name}</span>
           </div>
@@ -68,38 +99,10 @@ export function ProductCard({ product }: ProductCardProps) {
         </div>
       </CardContent>
       <CardFooter className="flex flex-col items-start">
-        {/* Real Price */}
-        <div className="text-2xl font-bold">
-          {new Intl.NumberFormat("fr-FR", {
-            style: "currency",
-            currency: currency,
-          }).format(amount)}
-
-          <span className="text-sm font-normal text-muted-foreground">
-            {product.default_price.recurring?.interval === "month" ? "/mois" : "/an"}
-          </span>
-        </div>
-
-        {/* Converted Price (below) */}
-        <div className="text-sm text-gray-500">
-          {new Intl.NumberFormat("fr-FR", {
-            style: "currency",
-            currency: currency,
-          }).format(
-            product.default_price.recurring?.interval === "month"
-              ? amount * 12 // Convert monthly to yearly
-              : amount / 12 // Convert yearly to monthly
-          )}
-          
-          <span>
-            {product.default_price.recurring?.interval === "month" ? " /an" : " /mois"}
-          </span>
-        </div>
-
         {/* Subscribe Button */}
-        <Button onClick={handleSubscribe} disabled={loading} className="mt-2">
+        {/* <Button onClick={handleSubscribe} disabled={loading} className="mt-2">
           {loading ? "Chargement..." : "Souscrire"}
-        </Button>
+        </Button> */}
       </CardFooter>
     </Card>
   );

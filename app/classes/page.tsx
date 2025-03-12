@@ -13,25 +13,25 @@ export default async function ClassesPage() {
   }
 
   const { data: classes } = await supabase
-    .from('classes')
-    .select(`
+  .from('classes')
+  .select(`
+    id,
+    name,
+    niveau_classe,
+    annee_promotion,
+    nom_ecole,
+    students (
       id,
-      name,
-      students (
-        id,
-        first_name,
-        last_name
-      )
-    `)
-    .order('created_at', { ascending: false });
+      first_name,
+      last_name
+    )
+  `)
+  .order('created_at', { ascending: false });
+
 
   return (
-    <PageLayout>
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-2xl font-bold">Mes Classes</h1>
-        <AddClassForm />
-      </div>
+    <div>
       <ClassList classes={classes || []} />
-    </PageLayout>
+    </div>
   );
 }

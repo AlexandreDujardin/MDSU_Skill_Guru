@@ -1,25 +1,27 @@
 'use client';
 
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
 import { updateClass } from '@/app/actions/classes';
+import { toast } from 'sonner';
 
 interface EditClassFormProps {
   classId: string;
   initialName: string;
+  open: boolean;
+  setOpen: (id: string | null) => void;
 }
 
-export function EditClassForm({ classId, initialName }: EditClassFormProps) {
-  const [open, setOpen] = useState(false);
-
+export function EditClassForm({ classId, initialName, open, setOpen }: EditClassFormProps) {
   return (
-    <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger asChild>
-        <Button variant="outline" size="sm">Modifier</Button>
-      </SheetTrigger>
+    <Sheet
+      open={open}
+      onOpenChange={(isOpen) => {
+        if (!isOpen) setOpen(null);
+      }}
+    >
       <SheetContent side="right">
         <SheetHeader>
           <SheetTitle>Modifier la classe</SheetTitle>
@@ -28,7 +30,8 @@ export function EditClassForm({ classId, initialName }: EditClassFormProps) {
           action={async (formData) => {
             formData.append('classId', classId);
             await updateClass(formData);
-            setOpen(false);
+            setOpen(null); // Ensure state resets
+            toast.success("Classe mise à jour !");
           }}
           className="space-y-4 mt-6"
         >
@@ -36,7 +39,10 @@ export function EditClassForm({ classId, initialName }: EditClassFormProps) {
             <Label htmlFor="name">Nom de la classe</Label>
             <Input id="name" name="name" defaultValue={initialName} required />
           </div>
-          <Button type="submit" className="w-full">Mettre à jour</Button>
+          <div className='flex justify-end gap-2'>
+            <Button type="secondary" onClick={() => setOpen(null)}>Annuler</Button>
+            <Button type="primary">Mettre à jour</Button>
+          </div>
         </form>
       </SheetContent>
     </Sheet>
