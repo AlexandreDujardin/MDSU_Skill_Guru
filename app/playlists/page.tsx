@@ -1,6 +1,5 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-import { PageLayout } from "@/components/PageLayout";
 import { PlaylistList } from "@/components/ui/playlists/PlaylistList";
 import { AddEditPlaylist } from "@/components/ui/playlists/AddEditPlaylist";
 
@@ -24,10 +23,10 @@ export default async function PlaylistPage() {
   if (playlistError) {
     console.error("❌ Supabase Fetch Error (Playlists):", playlistError.message, playlistError.details);
     return (
-      <PageLayout>
+      <div>
         <h1 className="text-2xl font-bold">Mes Playlists</h1>
         <p className="text-red-500 text-center">Erreur de chargement des playlists.</p>
-      </PageLayout>
+      </div>
     );
   }
 
@@ -55,15 +54,12 @@ export default async function PlaylistPage() {
   }));
 
   return (
-    <PageLayout>
-      {/* Header with Add Playlist button */}
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-2xl font-bold">Mes Playlists</h1>
-        <AddEditPlaylist />
+      <div>
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-2xl font-bold">Mes Playlists</h1>
+          <AddEditPlaylist />
+        </div>
+        <PlaylistList playlists={playlistsWithGames} />
       </div>
-
-      {/* Playlist Grid */}
-      <PlaylistList playlists={playlistsWithGames} />
-    </PageLayout>
   );
 }

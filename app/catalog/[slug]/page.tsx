@@ -9,7 +9,7 @@ export default async function GameDetailPage({ params }: { params: { slug: strin
   const { data: game, error } = await supabase
     .from("games")
     .select("*")
-    .eq("game_url", params.slug)
+    .eq("slug", params.slug)
     .single();
 
   if (error || !game) {
@@ -21,13 +21,15 @@ export default async function GameDetailPage({ params }: { params: { slug: strin
   }
 
   return (
-    <PageLayout>
+    <div>
       <GameDetail
         title={game.title}
         description={game.description}
-        tag={game.tags[0]} // First tag as primary
+        tags={game.tags || []}
         video={game.video}
+        concept={game.concept}
+        objectif={game.objectif}
       />
-    </PageLayout>
+    </div>
   );
 }

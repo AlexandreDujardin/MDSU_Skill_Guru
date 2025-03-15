@@ -33,10 +33,10 @@ export function SidebarWrapper({ children }: { children: React.ReactNode }) {
         <Sidebar 
           className={`fixed left-0 top-16 transition-all duration-300 ${isCollapsed ? "w-28" : "w-64"} h-[calc(100vh-4rem)] shadow-lg`}>
           {/* Sidebar Header with Toggle */}
-          <SidebarHeader className="flex justify-between items-center py-4 px-3">
+          <SidebarHeader className="flex justify-between items-end py-4 px-0">
             <button
               onClick={() => setIsCollapsed(!isCollapsed)}
-              className="p-2 rounded-md hover:bg-gray-200"
+              className="p-2 rounded-l-md bg-button-tertiary ml-auto"
             >
               {isCollapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
             </button>
@@ -60,26 +60,26 @@ export function SidebarWrapper({ children }: { children: React.ReactNode }) {
 
                   <Link href="/playlists" className="flex flex-col items-center p-4 hover:border-border-default hover:border-l-4 focus:border-l-4 border-border-default">
                     <img src="/images/icons/playlists.svg" alt="Playlists" className="h-6 w-6" />
-                    <span>Playlists de jeux</span>
+                    <span>Playlists</span>
                   </Link>
                   
                   <hr />
                   
                   <Link href="/classes" className="flex flex-col items-center p-4 hover:border-border-default hover:border-l-4 focus:border-l-4 border-border-default">
                     <img src="/images/icons/classes.svg" alt="Classes" className="h-6 w-6"/>
-                    <span>Mes classes</span>
+                    <span>Classes</span>
                   </Link>
 
                   <Link href="/suivi" className="flex flex-col items-center p-4 hover:border-border-default hover:border-l-4 focus:border-l-4 border-border-default">
                     <img src="/images/icons/suivi.svg" alt="Suivi pédagogique" className="h-6 w-6"/>
-                    <span>Suivi pédagogique</span>
+                    <span>Suivi</span>
                   </Link>
 
                   <hr />
 
                   <Link href="/support" className="flex flex-col items-center p-4 hover:border-border-default hover:border-l-4 focus:border-l-4 border-border-default">
                     <img src="/images/icons/help.svg" alt="Support" className="h-6 w-6"/>
-                    <span>Support technique</span>
+                    <span>Support</span>
                   </Link>
                 </div>
                 
@@ -157,7 +157,7 @@ export function SidebarWrapper({ children }: { children: React.ReactNode }) {
         </Sidebar>
 
         {/* Main Content - Adjusting for Sidebar and Navbar */}
-        <main className="flex-1 p-6 bg-gray-50 overflow-auto mt-16">{children}</main>
+        <main className="flex-1 p-6 bg-white overflow-auto mt-16">{children}</main>
     </SidebarProvider>
   );
 }
