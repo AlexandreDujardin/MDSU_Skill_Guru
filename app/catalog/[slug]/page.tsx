@@ -1,28 +1,35 @@
-import { GameDetail } from "@/components/GameDetail";
+import { GameDetail } from "@/components/ui/games/GameDetail";
 import { PageLayout } from "@/components/PageLayout";
-import games from "@/public/games.json";
+import { createClient } from "@/utils/supabase/server";
 
-const GameDetailPage = ({ params }: { params: { slug: string } }) => {
-  const game = games.find((game) => game.slug === params.slug);
+export default async function GameDetailPage({ params }: { params: { slug: string } }) {
+  const supabase = createClient();
 
-  if (!game) {
+  // Fetch the game by slug
+  const { data: game, error } = await supabase
+    .from("games")
+    .select("*")
+    .eq("slug", params.slug)
+    .single();
+
+  if (error || !game) {
     return (
       <div className="text-center mt-10">
-        <p className="text-xl text-red-500">Game not found!</p>
+        <p className="text-xl text-red-500">Jeu introuvable !</p>
       </div>
     );
   }
 
   return (
-    <PageLayout>
+    <div>
       <GameDetail
-          title={game.title}
-          description={game.description}
-          tag={game.tag}
-          video={game.video}
-        />
-    </PageLayout>
+        title={game.title}
+        description={game.description}
+        tags={game.tags || []}
+        video={game.video}
+        concept={game.concept}
+        objectif={game.objectif}
+      />
+    </div>
   );
-};
-
-export default GameDetailPage;
+}

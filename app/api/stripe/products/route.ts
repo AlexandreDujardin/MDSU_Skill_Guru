@@ -15,7 +15,9 @@ export async function GET() {
       expand: ["data.default_price"],
     });
 
-    return NextResponse.json(products.data);
+    const activeProducts = products.data.filter((product) => product.active && !product.metadata.archived);
+
+    return NextResponse.json(activeProducts);
   } catch (error) {
     console.error("Error fetching Stripe products:", error);
     return NextResponse.json({ error: "Failed to fetch products" }, { status: 500 });

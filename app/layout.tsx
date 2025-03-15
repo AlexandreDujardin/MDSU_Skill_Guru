@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import RootLayoutClient from "./RootLayoutClient";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Skill Guru",
@@ -17,6 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         {/* Delegate rendering logic to the client layout */}
+        <Toaster position="top-right" richColors />
         <RootLayoutClient>{children}</RootLayoutClient>
       </body>
     </html>

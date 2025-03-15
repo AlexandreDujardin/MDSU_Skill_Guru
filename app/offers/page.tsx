@@ -2,6 +2,7 @@ import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 import { PageLayout } from "@/components/PageLayout";
 import { ProductList } from '@/components/ui/products/product-list';
+import { Navbar } from '@/components/navbar';
 
 export default async function OffersPage() {
   const supabase = createClient();
@@ -40,9 +41,34 @@ export default async function OffersPage() {
   }
 
   return (
-    <PageLayout>
-      <h1 className="text-2xl font-bold mb-6">Nos Offres</h1>
-      <ProductList />
-    </PageLayout>
+    <div className="p-8 min-h-screen">
+      {/* Barre de navigation */}
+      <Navbar />
+
+      {/* Contenu principal */}
+      <div className="container justify-start mx-auto px-6 py-12">
+        <h1 className="text-h1-d font-bold text-text-primary mb-4">
+          Bienvenue chez Skill Guru !
+        </h1>
+        <h2 className="text-text-primary font-bold text-h2-d">
+          Pour bénéficier de l’ensemble de nos fonctionnalités, veuillez sélectionner l’offre de votre choix et souscrire à un abonnement.
+        </h2>
+      </div>
+
+      {/* Affichage des offres */}
+      <div className="container mx-auto px-6">
+        <ProductList />
+        <h2 className="text-text-primary font-bold mt-8 text-h2-d">Avec Skill Guru, l’expertise devient un jeu !</h2>
+      </div>
+
+      {/* Footer */}
+      <footer className="mt-8 text-center text-text-secondary text-sm py-2 border-t border-border-default">
+        <div className="flex justify-center gap-4 mt-4">
+          <a href="#" className="hover:underline">Mentions légales</a>
+          <a href="#" className="hover:underline">CGV</a>
+          <a href="#" className="hover:underline">CGU</a>
+        </div>
+      </footer>
+    </div>
   );
 }
