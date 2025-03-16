@@ -5,11 +5,11 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { CheckIcon } from 'lucide-react';
 
-interface SuccessPageProps {
-  searchParams: Record<string, string | undefined>; // ✅ Correction ici
-}
+// ✅ Nouvelle syntaxe Next.js 15 : récupération asynchrone des searchParams
+export default async function SuccessPage({ searchParams }: { searchParams: Promise<{ session_id?: string }> }) {
+  const params = await searchParams; // ✅ Attendre la résolution de searchParams
+  const sessionId = params.session_id;
 
-export default async function SuccessPage({ searchParams }: SuccessPageProps) {
   const supabase = createClient();
   const { data: { session } } = await supabase.auth.getSession();
 
@@ -17,11 +17,9 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
     redirect('/');
   }
 
-  const sessionId = searchParams.session_id; // ✅ searchParams est maintenant bien typé
-
   try {
     if (sessionId) {
-      // Récupération de la session de paiement
+      // Récupération de la session Stripe
       const checkoutSession = await stripe.checkout.sessions.retrieve(sessionId, {
         expand: ['subscription', 'subscription.default_payment_method', 'subscription.items'],
       });
