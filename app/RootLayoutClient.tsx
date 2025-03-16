@@ -16,24 +16,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// A function to dynamically map routes to titles
-const getPageTitle = (pathname: string): string => {
-  switch (pathname) {
-    case "/":
-      return "Accueil";
-    case "/catalog":
-      return "Gurulogue";
-    case "/offers":
-      return "Offers";
-    case "/account":
-      return "Mon compte";
-    case "/classes":
-      return "Classes";
-    default:
-      return "Skill Guru";
-  }
-};
-
 export default function RootLayoutClient({
   children,
 }: {
@@ -45,9 +27,6 @@ export default function RootLayoutClient({
   const authRoutes = ["/auth/sign-in", "/auth/sign-up", "/auth/verify-email", "/offers"];
   const hideLayout = authRoutes.includes(pathname);
 
-  // Get the page title based on the current route
-  const pageTitle = getPageTitle(pathname);
-
   return (
     <div className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
       {hideLayout ? (
@@ -56,7 +35,7 @@ export default function RootLayoutClient({
       ) : (
         // Render Navbar and Sidebar for all other routes
         <>
-          <Navbar pageTitle={pageTitle} />
+          <Navbar />
           <SidebarWrapper>{children}</SidebarWrapper>
         </>
       )}

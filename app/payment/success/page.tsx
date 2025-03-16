@@ -5,9 +5,8 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { CheckIcon } from 'lucide-react';
 
-// ✅ Nouvelle syntaxe Next.js 15 : récupération asynchrone des searchParams
 export default async function SuccessPage({ searchParams }: { searchParams: Promise<{ session_id?: string }> }) {
-  const params = await searchParams; // ✅ Attendre la résolution de searchParams
+  const params = await searchParams;
   const sessionId = params.session_id;
 
   const supabase = createClient();

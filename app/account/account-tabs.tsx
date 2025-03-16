@@ -3,7 +3,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ProfileForm } from "./profile-form";
 import { SubscriptionsList } from "./subscriptions-list";
-import type Stripe from 'stripe'; // ✅ Correct import
+import type Stripe from 'stripe';
 import type { User } from '@supabase/supabase-js';
 
 interface AccountTabsProps {

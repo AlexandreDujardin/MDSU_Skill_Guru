@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import { PlaylistDetails } from "@/components/ui/playlists/PlayListDetails";
-import { PageProps } from "next"; // ✅ Ajout de l'import
+import { PageProps } from "next";
 
 export default async function PlaylistPage({ params }: PageProps<{ slug: string }>) {
   const supabase = createClient();
