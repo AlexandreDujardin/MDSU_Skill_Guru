@@ -6,17 +6,27 @@ import { revalidatePath } from 'next/cache'
 export async function addClass(formData: FormData) {
   const supabase = createClient();
   const name = formData.get('name') as string;
+  const nom_ecole = formData.get('nom_ecole') as string;
+  const niveau_classe = formData.get('niveau_classe') as string;
+  const annee_promotion = formData.get('annee_promotion') as string;
 
   const { data: { session }, error: sessionError } = await supabase.auth.getSession();
 
   if (sessionError) throw sessionError;
   if (!session?.user) throw new Error('Not authenticated');
 
+  // ✅ Generate slug from class name
+  const slug = name.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
+
   const { error } = await supabase
     .from('classes')
     .insert({
       name,
-      user_id: session.user.id, // Include the authenticated user's ID
+      nom_ecole,
+      niveau_classe,
+      annee_promotion,
+      slug, // ✅ Save the slug in Supabase
+      user_id: session.user.id,
     });
 
   if (error) throw error;
@@ -47,7 +57,7 @@ export async function addStudents(formData: FormData) {
   if (sessionError) throw sessionError;
   if (!session?.user) throw new Error('Not authenticated');
 
-  // Verify the class belongs to the user
+  // ✅ Verify the class belongs to the user
   const { data: classData, error: classError } = await supabase
     .from('classes')
     .select('id')
@@ -59,19 +69,37 @@ export async function addStudents(formData: FormData) {
     throw new Error('Vous n’êtes pas autorisé à ajouter des élèves à cette classe.');
   }
 
-  // Insert multiple students at once
+  // ✅ Fetch the last `custom_id` for the class
+  const { data: lastStudent, error: lastStudentError } = await supabase
+    .from('students')
+    .select('custom_id')
+    .eq('class_id', classId)
+    .order('custom_id', { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  let nextCustomId = lastStudent?.custom_id ? parseInt(lastStudent.custom_id) + 1 : 1; // Start from 1 if no students exist
+
+  // ✅ Insert multiple students with `custom_id`
   const { error } = await supabase
     .from('students')
-    .insert(students.map((student: any) => ({
-      first_name: student.firstName,
-      last_name: student.lastName,
-      class_id: classId,
-    })));
+    .insert(students.map((student: any) => {
+      const studentCustomId = String(nextCustomId).padStart(5, '0'); // Format ID
+      nextCustomId++; // Increment after assignment
+
+      return {
+        first_name: student.firstName,
+        last_name: student.lastName,
+        class_id: classId,
+        custom_id: studentCustomId, // Assign correctly formatted ID
+      };
+    }));
 
   if (error) throw error;
 
   revalidatePath('/classes');
 }
+
 
 
 export async function deleteStudent(studentId: string) {

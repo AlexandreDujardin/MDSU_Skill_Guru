@@ -32,11 +32,11 @@ export function AddGamesToPlaylist({ playlistId }: AddGamesToPlaylistProps) {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant="outline" size="sm">Ajouter des jeux</Button>
+        <Button type='secondary' size="sm" className='min-w-fit'>Ajouter des jeux</Button>
       </SheetTrigger>
       <SheetContent side="right">
         <SheetHeader>
-          <SheetTitle>Ajouter des jeux</SheetTitle>
+          <SheetTitle className='text-text-primary'>Ajouter des jeux</SheetTitle>
         </SheetHeader>
         <div className="space-y-4 mt-6">
           {games.map((game) => (

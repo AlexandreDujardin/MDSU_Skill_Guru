@@ -108,3 +108,69 @@ export async function removeGameFromPlaylist(playlistId: string, gameId: string)
 
   revalidatePath('/playlists');
 }
+
+export async function toggleGameInFavorites(gameId: string) {
+  if (!gameId) {
+    console.error("🚨 ERROR: gameId is null or undefined.");
+    return;
+  }
+
+
+  const supabase = createClient();
+  const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+  if (sessionError || !session?.user) throw new Error('Not authenticated');
+
+  // Check if the user already has a Favorites playlist
+  let { data: favoritesPlaylist } = await supabase
+    .from('playlists')
+    .select('id')
+    .eq('user_id', session.user.id)
+    .eq('is_favorite', true)
+    .single();
+
+  // If no favorites playlist exists, create one
+  if (!favoritesPlaylist) {
+    const { data, error } = await supabase
+      .from('playlists')
+      .insert({
+        name: 'Mes favoris',
+        user_id: session.user.id,
+        is_favorite: true
+      })
+      .select()
+      .single();
+    
+    if (error) throw error;
+    favoritesPlaylist = data;
+  }
+
+  // Check if the game is already in favorites
+  const { data: existingGame } = await supabase
+    .from('playlist_games')
+    .select('id')
+    .eq('playlist_id', favoritesPlaylist.id)
+    .eq('game_id', gameId)
+    .single();
+
+  if (existingGame) {
+    // Remove game from favorites
+    const { error } = await supabase
+      .from('playlist_games')
+      .delete()
+      .eq('id', existingGame.id);
+
+    if (error) throw error;
+  } else {
+    // Add game to favorites
+    const { error } = await supabase
+      .from('playlist_games')
+      .insert({
+        playlist_id: favoritesPlaylist.id,
+        game_id: gameId,
+      });
+
+    if (error) throw error;
+  }
+
+  revalidatePath('/playlists');
+}

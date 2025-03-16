@@ -6,10 +6,10 @@ export function PageLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className="flex-1 container py-16">
+    <main className="w-full px-4 sm:px-6 lg:px-8 py-12">
 
       {/* Page Content */}
-      <div>{children}</div>
+      <div className="max-w-7xl mx-auto">{children}</div>
     </main>
   );
 }
