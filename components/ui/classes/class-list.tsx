@@ -132,12 +132,12 @@ export function ClassList() {
       <Tabs defaultValue="classes">
         <TabsList className="flex w-3/4 pb-4 items-center justify-center mx-auto">
           <TabsTrigger value="classes" className="text-lg font-semibold flex-1 flex justify-center items-center gap-2 py-3">
-            <img src="/images/classes/classes.svg" alt="classes" className="h-5"/> 
+            <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/classes/classes.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJjbGFzc2VzL2NsYXNzZXMuc3ZnIiwiaWF0IjoxNzQyMTAwMjYzLCJleHAiOjE3NzM2MzYyNjN9.y9WmDLuuHt3T2_5MKqEVGmlXfM7_5-4nkQnh2YTCbPM" alt="classes" className="h-5"/> 
             Mes classes
           </TabsTrigger>
           
           <TabsTrigger value="students" className="text-lg font-semibold flex-1 flex justify-center items-center gap-2 py-3">
-            <img src="/images/classes/icon2.svg" alt="students" className="h-5"/>
+            <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/classes/icon2.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJjbGFzc2VzL2ljb24yLnN2ZyIsImlhdCI6MTc0MjEwMDQwNCwiZXhwIjoxNzczNjM2NDA0fQ.v2nFhvbEuuxJAWlIwwRsxlWHQugxVWjA3Er9tj11jVE" alt="students" className="h-5"/>
             Liste de tous mes élèves
           </TabsTrigger>
         </TabsList>
@@ -155,7 +155,7 @@ export function ClassList() {
             <div className="flex flex-col mt-10 h-[calc(80vh-10rem)] w-full">
               <p className="text-text-tertiary text-lg">Vous n’avez pas encore créé de classe.</p>
               <div className='flex justify-center'>
-                <img src="/images/classes/no-student.svg" alt="No class" className="w-62 mt-4" />
+                <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/classes/no-student.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJjbGFzc2VzL25vLXN0dWRlbnQuc3ZnIiwiaWF0IjoxNzQyMTAwNDczLCJleHAiOjE3NzM2MzY0NzN9.CxlYoHPEn8KS4BhvWvwDNiOZ8mEnIoTKIXPkbb0UkGc" alt="No class" className="w-62 mt-4" />
               </div>
             </div>
           ) : (
@@ -170,7 +170,7 @@ export function ClassList() {
                     <CardContent>
                       <p className="mt-2 text-sm text-text-primary font-semibold">{classItem.students.length} élèves</p>
                       <span className="bg-button-primary text-text-alternative text-sm rounded-full px-3 py-1 inline-flex items-center gap-2 w-auto">
-                        <img src="/images/classes/icon.svg" alt="" className='h-4' />
+                        <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/classes/icon.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJjbGFzc2VzL2ljb24uc3ZnIiwiaWF0IjoxNzQyMTAwNDU3LCJleHAiOjE3NzM2MzY0NTd9.EdeLVeOo_UMC67Vmc9NFmQfI1fUDU0mAOvyGjiLIhEM" alt="" className='h-4' />
                         {classItem.nom_ecole}
                       </span>
                     </CardContent>
@@ -248,7 +248,7 @@ export function ClassList() {
               // 🛑 No students found
               <div className="text-center border rounded-lg p-6 bg-background-surface h-[calc(90vh-10rem)] w-full">
                 <p className="text-lg text-gray-600">Vous n’avez pas encore ajouté d’élèves.</p>
-                <img src="/images/classes/no-student.svg" alt="No students" className="w-62 mx-auto mt-4" />
+                <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/classes/no-student.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJjbGFzc2VzL25vLXN0dWRlbnQuc3ZnIiwiaWF0IjoxNzQyMTAwNDczLCJleHAiOjE3NzM2MzY0NzN9.CxlYoHPEn8KS4BhvWvwDNiOZ8mEnIoTKIXPkbb0UkGc" alt="No students" className="w-62 mx-auto mt-4" />
               </div>
             )}
           </div>

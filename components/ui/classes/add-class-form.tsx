@@ -26,7 +26,7 @@ export function AddClassForm() {
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button variantType="secondary" className="flex justify-evenly items-center gap-2">
-          <img src="/images/classes/add.svg" alt="ajouter classe" className="h-6" />
+          <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/classes/add.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJjbGFzc2VzL2FkZC5zdmciLCJpYXQiOjE3NDIxMDAxNDgsImV4cCI6MTc3MzYzNjE0OH0.YMS7REaBUvx2dUI-7j2NgN3BoEA_By8bmW_12dS1Dco" alt="ajouter classe" className="h-6" />
           Créer une classe
         </Button>
       </SheetTrigger>

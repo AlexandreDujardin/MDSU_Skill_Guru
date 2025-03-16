@@ -37,7 +37,7 @@ export function Navbar() {
     <nav className="fixed top-0 left-0 w-full h-16 bg-white shadow-md flex items-center px-6 z-50">
       {/* Logo */}
       <Link href="/" className="flex-shrink-0">
-        <img src="/images/logo_brand.svg" alt="Skill Guru Logo" className="h-10" />
+        <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/logos/logo_brand.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJsb2dvcy9sb2dvX2JyYW5kLnN2ZyIsImlhdCI6MTc0MjEwMTIzOSwiZXhwIjoxNzczNjM3MjM5fQ.Ei-Snon5D5S1kJjRUUlxSNqAj_IPEf9ES5vDa_rwPBA" alt="Skill Guru Logo" className="h-10" />
       </Link>
 
       {/* Search Bar */}
@@ -56,7 +56,7 @@ export function Navbar() {
       <div className="flex items-center space-x-6">
         {/* Notification Icon */}
         <button className="relative p-2 border border-border-active rounded-md hover:bg-primary/10">
-          <img src="/images/icons/bell.svg" alt="Notification" className="h-6" />
+          <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/icons/bell.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpY29ucy9iZWxsLnN2ZyIsImlhdCI6MTc0MjEwMDg5MiwiZXhwIjoxNzczNjM2ODkyfQ.FZM7yQmEEUfe__ujbAYmr6GsDvD-8E28Oa5A6T4WxTM" alt="Notification" className="h-6" />
           <span className="absolute top-0 right-0 bg-red-600 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
             0
           </span>
@@ -66,7 +66,7 @@ export function Navbar() {
         {isAuthenticated ? (
           <Button variantType="primary">
             <Link href="/account" className="flex justify-evenly items-center text-white px-4 py-2 rounded-md gap-2">
-              <img src="/images/icons/account.svg" alt="Mon compte" className="h-6" />
+              <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/icons/account.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpY29ucy9hY2NvdW50LnN2ZyIsImlhdCI6MTc0MjEwMDg4MCwiZXhwIjoxNzczNjM2ODgwfQ.d4zxcXJeJnPSBt465nDZ4MY7Z_d-GnzORc8sjP_HGY8" alt="Mon compte" className="h-6" />
               Mon compte
               <ChevronDown size={18} />
             </Link>

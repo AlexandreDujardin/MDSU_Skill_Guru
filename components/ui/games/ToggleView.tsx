@@ -16,7 +16,7 @@ export const ToggleView = ({ onChange }: ToggleViewProps) => {
         className="bg-transparent focus:bg-background-elevated focus:border-border-default focus:border hover:bg-transparent  text-text-primary"
         onClick={() => { setView("list"); onChange("list"); }}
       >
-        <img src="/images/games/list.svg" alt="liste" />
+        <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/games/list.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJnYW1lcy9saXN0LnN2ZyIsImlhdCI6MTc0MjEwMDY2MSwiZXhwIjoxNzczNjM2NjYxfQ._PRv9urag7WjLcIPwXMUbBDByKzLvs8HWehiUHHn2Zc" alt="liste" />
         Liste
       </Button>
       
@@ -27,7 +27,7 @@ export const ToggleView = ({ onChange }: ToggleViewProps) => {
         className="bg-transparent focus:bg-background-elevated focus:border-border-default focus:border hover:bg-transparent  text-text-primary"
         onClick={() => { setView("grid"); onChange("grid"); }}
       >
-        <img src="/images/games/grid.svg" alt="grille" />
+        <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/games/grid.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJnYW1lcy9ncmlkLnN2ZyIsImlhdCI6MTc0MjEwMDYyOSwiZXhwIjoxNzczNjM2NjI5fQ.-_ZkpE67HJJbDMwSVs0FzdcnCQLONoM46UcPihCyf5I" alt="grille" />
         Grille
       </Button>
     </div>

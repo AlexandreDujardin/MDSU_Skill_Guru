@@ -57,7 +57,7 @@ export function PlaylistList({ playlists }: { playlists: any[] }) {
         ) : (
           <div className="text-center border rounded-lg p-6 bg-background-surface h-[calc(90vh-10rem)] w-full">
             <p className="text-lg text-text-tertiary">Aucune playlist disponible.</p>
-            <img src="/images/playlists/add_game.svg" alt="No playlist" className="w-62 mx-auto mt-4" />
+            <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/playlists/add_game.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJwbGF5bGlzdHMvYWRkX2dhbWUuc3ZnIiwiaWF0IjoxNzQyMTAxMDgwLCJleHAiOjE3NzM2MzcwODB9.8OYBS_fuDweU9M_hJFvi-obFQITWHXz5Yi9HaIKXDLo" alt="No playlist" className="w-62 mx-auto mt-4" />
           </div>
         )}
       </div>

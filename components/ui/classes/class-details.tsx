@@ -125,7 +125,7 @@ export function ClassDetails({ classItem }: { classItem: Class }) {
           <p className="text-body1 text-text-secondary">{classItem.niveau_classe}</p>
         </div>
         <span className="bg-border-default text-text-tertiary px-3 py-1 rounded-full text-sm flex items-center gap-2">
-          <img src="/images/classes/icon2.svg" alt="ecole" className='h-5'/>
+          <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/classes/icon2.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJjbGFzc2VzL2ljb24yLnN2ZyIsImlhdCI6MTc0MjEwMDQwNCwiZXhwIjoxNzczNjM2NDA0fQ.v2nFhvbEuuxJAWlIwwRsxlWHQugxVWjA3Er9tj11jVE" alt="ecole" className='h-5'/>
           {classItem.nom_ecole}
         </span>
       </div>
@@ -156,13 +156,13 @@ export function ClassDetails({ classItem }: { classItem: Class }) {
                 <div className="flex gap-2">
                   {selectedStudents.length === 1 && (
                     <Button variantType="tertiary" className='font-semibold'>
-                      <img src="/images/classes/pen_update.svg" alt="update" />
+                      <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/classes/pen_update.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJjbGFzc2VzL3Blbl91cGRhdGUuc3ZnIiwiaWF0IjoxNzQyMTAwNTI1LCJleHAiOjE3NzM2MzY1MjV9.rXvgj8kP4RxNHVsE-bil8QmFxQ7SgwG2sphmrdJPhQU" alt="update" />
                       Modifier
                     </Button>
                   )}
                   {selectedStudents.length > 0 && (
                     <Button variantType="tertiary" className='font-semibold' onClick={handleDelete}>
-                      <img src="/images/classes/trashcan.svg" alt="delete" />
+                      <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/classes/trashcan.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJjbGFzc2VzL3RyYXNoY2FuLnN2ZyIsImlhdCI6MTc0MjEwMDU0NiwiZXhwIjoxNzczNjM2NTQ2fQ.uNRJSpBrtuP1tpkOI8VfMvBlveHNiNQ5uH4Vm5UNNiE" alt="delete" />
                       Supprimer
                     </Button>
                   )}
@@ -226,7 +226,7 @@ export function ClassDetails({ classItem }: { classItem: Class }) {
               <AddStudentForm classId={classItem.id} />
             </Button>
           </div>
-          <img src="/images/classes/no-student.svg" alt="No students" className="w-62 mx-auto mt-4" />
+          <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/classes/no-student.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJjbGFzc2VzL25vLXN0dWRlbnQuc3ZnIiwiaWF0IjoxNzQyMTAwNDczLCJleHAiOjE3NzM2MzY0NzN9.CxlYoHPEn8KS4BhvWvwDNiOZ8mEnIoTKIXPkbb0UkGc" alt="No students" className="w-62 mx-auto mt-4" />
         </div>
       )}
     </div>

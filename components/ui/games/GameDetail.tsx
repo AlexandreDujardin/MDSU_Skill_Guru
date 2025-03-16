@@ -23,7 +23,7 @@ export const GameDetail = ({ title, description, tags = [], video, concept, obje
           {tags && tags.length > 0 ? (
             tags.map((tag, index) => (
               <Badge key={index} className="bg-border-default text-text-tertiary text-sm px-3 py-1 rounded-full gap-2">
-                <img src="/images/games/tags_dark.svg" alt="tags" className="h-4"/>
+                <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/games/tags_dark.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJnYW1lcy90YWdzX2Rhcmsuc3ZnIiwiaWF0IjoxNzQyMTAwNzg1LCJleHAiOjE3NzM2MzY3ODV9.f8rQ-o1pkX6awdj4GAbXY77F0249bkatXbbBi4Ow1SE" alt="tags" className="h-4"/>
                 {tag}
               </Badge>
             ))
@@ -68,11 +68,11 @@ export const GameDetail = ({ title, description, tags = [], video, concept, obje
           {/* 🎮 Boutons Actions */}
           <div className="flex gap-4 mt-4">
               <Button variantType="secondary" className="flex items-center gap-2 w-min-content">
-                <img src="/images/games/settings.svg" alt="programmer" className="h-6"/>
+                <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/games/settings.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJnYW1lcy9zZXR0aW5ncy5zdmciLCJpYXQiOjE3NDIxMDA3NTUsImV4cCI6MTc3MzYzNjc1NX0.3fCEC-ctvSXHFklZwJxw0ds13IYxu7aces607yJVn8M" alt="programmer" className="h-6"/>
                 Programmer une session
               </Button>
               <Button variantType="primary" className="flex items-center gap-2 w-min-content">
-              <img src="/images/games/play.svg" alt="programmer" className="h-6"/>
+              <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/games/play.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJnYW1lcy9wbGF5LnN2ZyIsImlhdCI6MTc0MjEwMDcyNywiZXhwIjoxNzczNjM2NzI3fQ.r9MIBc6tPJIUIZWvd0M3jFxHNlygGl-7dR26Wikvkbg" alt="programmer" className="h-6"/>
                 Lancer le jeu
               </Button>
             </div>
@@ -85,7 +85,7 @@ export const GameDetail = ({ title, description, tags = [], video, concept, obje
             {/* 📌 Première colonne */}
             <Card className="p-6 bg-background-primary">
               <h4 className="flex flex-row items-center text-h3-m font-semibold text-text-tertiary mb-4 gap-2">
-                <img src="/images/games/trainer.svg" alt="formateur" className="h-8"/>
+                <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/games/trainer.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJnYW1lcy90cmFpbmVyLnN2ZyIsImlhdCI6MTc0MjEwMDgzMSwiZXhwIjoxNzczNjM2ODMxfQ.PuU4wiDbyIIeEawN4-Lrl_5CONZDOf0RkzhbRAQ5A1s" alt="formateur" className="h-8"/>
                 Rôle du formateur
               </h4>
               <div className="space-y-4">
@@ -100,7 +100,7 @@ export const GameDetail = ({ title, description, tags = [], video, concept, obje
 
             <Card className="p-6 bg-background-primary">
               <h4 className="flex flex-row items-center text-h3-m font-semibold text-text-tertiary mb-4 gap-2">
-              <img src="/images/games/mecanics.svg" alt="formateur" className="h-8"/>
+              <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/games/mecanics.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJnYW1lcy9tZWNhbmljcy5zdmciLCJpYXQiOjE3NDIxMDA2NzUsImV4cCI6MTc3MzYzNjY3NX0.lnjnFrZYvUPgiu-aAwvc6n4Tuy7bh0qS6xMfJj9rbaw" alt="formateur" className="h-8"/>
                 Mécanique de validation
               </h4>
               <ul className="list-disc pl-4 text-gray-600 space-y-2">
@@ -113,7 +113,7 @@ export const GameDetail = ({ title, description, tags = [], video, concept, obje
             
             <Card className="p-6 bg-background-primary">
               <h4 className="flex flex-row items-center text-h3-m font-semibold text-text-tertiary mb-4 gap-2">
-                <img src="/images/games/steps.svg" alt="formateur" className="h-8"/>
+                <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/games/steps.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJnYW1lcy9zdGVwcy5zdmciLCJpYXQiOjE3NDIxMDA3NzEsImV4cCI6MTc3MzYzNjc3MX0.R6C_auaMgR5sgicxz65a9ZYwpFTCtuvcVlBRSEiCM2Y" alt="formateur" className="h-8"/>
                 Déroulement du jeu
               </h4>
               <div className="space-y-4 flex flex-row">

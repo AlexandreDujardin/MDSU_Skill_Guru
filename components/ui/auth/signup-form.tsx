@@ -65,7 +65,7 @@ export default function SignUpForm() {
 
   return (
     <AuthLayout
-      imageSrc={step === 1 ? "/images/auth/image-background-connexion-etape-1.svg" : "/images/auth/image-background-connexion-etape-2.svg"}
+      imageSrc={step === 1 ? "https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/auth/image-background-connexion-etape-1.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhdXRoL2ltYWdlLWJhY2tncm91bmQtY29ubmV4aW9uLWV0YXBlLTEuc3ZnIiwiaWF0IjoxNzQyMTAwMDQxLCJleHAiOjE3NzM2MzYwNDF9.6_80vkSUTpet4-nXjVekggMfzLJn2VMeRbxK2lRw1RE" : "https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/auth/image-background-connexion-etape-2.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhdXRoL2ltYWdlLWJhY2tncm91bmQtY29ubmV4aW9uLWV0YXBlLTIuc3ZnIiwiaWF0IjoxNzQyMTAwMDEwLCJleHAiOjE3NzM2MzYwMTB9.7hWhEvsnKxv7XeLz5GddVVUKp-ebqOdU02D5Yy7QopQ"}
     >
       <div className="max-w-lg mx-auto">
         <h2 className="text-4xl font-bold text-text-primary mb-2">Créer un compte</h2>

@@ -214,7 +214,7 @@ const CarouselPrevious = React.forwardRef<
       onClick={scrollPrev}
       {...props}
     >
-      <img src="/images/games/right.svg" alt="previous" />
+      <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/games/right.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJnYW1lcy9yaWdodC5zdmciLCJpYXQiOjE3NDIxMDA3NDIsImV4cCI6MTc3MzYzNjc0Mn0.bzrS0VbNbj905PDAt1e6Nvj9KWPYY9ILSOumSGuVYxA" alt="previous" />
       <span className="sr-only">Previous slide</span>
     </Button>
   )
@@ -241,7 +241,7 @@ const CarouselNext = React.forwardRef<
       onClick={scrollNext}
       {...props}
     >
-      <img src="/images/games/left.svg" alt="next"/>
+      <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/games/left.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJnYW1lcy9sZWZ0LnN2ZyIsImlhdCI6MTc0MjEwMDY0NCwiZXhwIjoxNzczNjM2NjQ0fQ.DigND-aX23V1ACpqxvcDdNPPr-5do9oN5m-467SgLMw" alt="next"/>
       <span className="sr-only">Next slide</span>
     </Button>
   )

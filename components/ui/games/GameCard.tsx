@@ -72,7 +72,7 @@ export const GameCard = ({ id, title, description, tags, thumbnail, slug, view }
             className="absolute top-2 left-2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition"
             onClick={handleFavoriteToggle}
           >
-            {isFavorite ? <img src="/images/games/favorite.svg" alt="favoris" /> : <img src="/images/games/not-favorite.svg" alt="pas favoris" />}
+            {isFavorite ? <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/games/favorite.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJnYW1lcy9mYXZvcml0ZS5zdmciLCJpYXQiOjE3NDIxMDA1OTgsImV4cCI6MTc3MzYzNjU5OH0.Uo0ysB0doypnMaV5-gUnsR1L2VVN7gqlMkP6wAazmFw" alt="favoris" /> : <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/games/not-favorite.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJnYW1lcy9ub3QtZmF2b3JpdGUuc3ZnIiwiaWF0IjoxNzQyMTAwNjg5LCJleHAiOjE3NzM2MzY2ODl9._JM4KvhNEmQEV_8T7XYrI6zdEdn_Xo1z2NwjJbLIsTg" alt="pas favoris" />}
           </button>
         </div>
 
@@ -89,7 +89,7 @@ export const GameCard = ({ id, title, description, tags, thumbnail, slug, view }
               {tags.length > 0 ? (
                 tags.map((tag, index) => (
                   <Badge key={tag + index} className="bg-button-primary text-text-alternative text-xs px-3 py-1 rounded-full gap-2">
-                    <img src="/images/games/tags.svg" alt="tag" className="h-4"/>
+                    <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/games/tags.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJnYW1lcy90YWdzLnN2ZyIsImlhdCI6MTc0MjEwMDgwNSwiZXhwIjoxNzczNjM2ODA1fQ.iEA7XXntWtay_yg_ZAvZgFHpHSDTGOa12U6h-JRMvaw" alt="tag" className="h-4"/>
                     {tag}
                   </Badge>
                 ))

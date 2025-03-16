@@ -19,7 +19,7 @@ export function AddEditPlaylist({ playlist }: AddEditPlaylistProps) {
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button variantType="secondary">
-          <img src="/images/classes/add.svg" alt="Ajouter" className="h-6" />
+          <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/classes/add.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJjbGFzc2VzL2FkZC5zdmciLCJpYXQiOjE3NDIxMDAxNDgsImV4cCI6MTc3MzYzNjE0OH0.YMS7REaBUvx2dUI-7j2NgN3BoEA_By8bmW_12dS1Dco" alt="Ajouter" className="h-6" />
           Créer une playlist
         </Button>
       </SheetTrigger>

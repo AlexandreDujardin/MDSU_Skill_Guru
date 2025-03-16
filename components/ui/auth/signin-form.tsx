@@ -46,7 +46,7 @@ export default function SignInForm() {
   };
 
   return (
-    <AuthLayout imageSrc="/images/auth/image-background-connexion.svg">
+    <AuthLayout imageSrc="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/auth/image-background-connexion.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhdXRoL2ltYWdlLWJhY2tncm91bmQtY29ubmV4aW9uLnN2ZyIsImlhdCI6MTc0MjA5OTk5NiwiZXhwIjoxNzczNjM1OTk2fQ.IT0A7wywba6MT76gF1LuFOe9NUgsz7Kb_9yo27RoM18">
       <h2 className="text-4xl font-bold mb-4">Connexion</h2>
       <p className="mb-6 text-text-primary">
         Veuillez renseigner votre email et mot de passe pour accéder à votre espace Skill Guru.

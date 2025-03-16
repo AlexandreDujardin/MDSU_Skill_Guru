@@ -69,7 +69,7 @@ export function AddStudentForm({ classId }: AddStudentFormProps) {
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button variantType="secondary" size="lg">
-          <img src="/images/classes/add.svg" alt="ajouter" />
+          <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/classes/add.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJjbGFzc2VzL2FkZC5zdmciLCJpYXQiOjE3NDIxMDAxNDgsImV4cCI6MTc3MzYzNjE0OH0.YMS7REaBUvx2dUI-7j2NgN3BoEA_By8bmW_12dS1Dco" alt="ajouter" />
           Créer des profils élèves
         </Button>
       </SheetTrigger>
@@ -82,11 +82,11 @@ export function AddStudentForm({ classId }: AddStudentFormProps) {
         <Tabs defaultValue="manual" className="mt-4">
           <TabsList className="flex border-b">
             <TabsTrigger value="manual" className="w-1/2 text-center gap-2">
-              <img src="/images/classes/pen.svg" alt="ajouter" />
+              <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/classes/pen.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJjbGFzc2VzL3Blbi5zdmciLCJpYXQiOjE3NDIxMDA1MTAsImV4cCI6MTc3MzYzNjUxMH0.9L1EnF2upxTu-HQggEZ9VgP3Dqf_bzaMr5is1g725iI" alt="ajouter" />
               Ajouter manuellement
             </TabsTrigger>
             <TabsTrigger value="upload" className="w-1/2 text-center gap-2">
-              <img src="/images/classes/add.svg" alt="charger" />
+              <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/classes/add.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJjbGFzc2VzL2FkZC5zdmciLCJpYXQiOjE3NDIxMDAxNDgsImV4cCI6MTc3MzYzNjE0OH0.YMS7REaBUvx2dUI-7j2NgN3BoEA_By8bmW_12dS1Dco" alt="charger" />
               Charger une liste
             </TabsTrigger>
           </TabsList>
@@ -144,7 +144,7 @@ export function AddStudentForm({ classId }: AddStudentFormProps) {
 
               <div className='flex justify-end gap-2'>
                 <Button variantType="secondary" onClick={handleAddStudentField}>
-                  <img src="/images/classes/add.svg" alt="ajouter" />
+                  <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/classes/add.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJjbGFzc2VzL2FkZC5zdmciLCJpYXQiOjE3NDIxMDAxNDgsImV4cCI6MTc3MzYzNjE0OH0.YMS7REaBUvx2dUI-7j2NgN3BoEA_By8bmW_12dS1Dco" alt="ajouter" />
                   Ajouter un autre élève
                 </Button>
                 <Button variantType="primary">Valider</Button>

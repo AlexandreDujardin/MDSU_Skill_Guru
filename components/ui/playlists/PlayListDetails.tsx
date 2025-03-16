@@ -124,7 +124,7 @@ export function PlaylistDetails({ playlist }: { playlist: any }) {
                 <AddGamesToPlaylist playlistId={playlistData.id} />
               </Button>
             </div>
-            <img src="/images/playlists/add_game.svg" alt="No games" className="w-62 mx-auto mt-4" />
+            <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/playlists/add_game.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJwbGF5bGlzdHMvYWRkX2dhbWUuc3ZnIiwiaWF0IjoxNzQyMTAxMDgwLCJleHAiOjE3NzM2MzcwODB9.8OYBS_fuDweU9M_hJFvi-obFQITWHXz5Yi9HaIKXDLo" alt="No games" className="w-62 mx-auto mt-4" />
             <p className="text-lg text-gray-600">Vous n’avez pas encore ajouté de jeu dans cette playlist.</p>
           </div>
         )}
