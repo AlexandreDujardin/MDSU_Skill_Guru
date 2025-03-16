@@ -1,8 +1,9 @@
 import { notFound } from 'next/navigation';
 import { createClient } from '@/utils/supabase/server';
 import { ClassDetails } from '@/components/ui/classes/class-details';
+import { PageProps } from "next"; // ✅ Ajout de l'import
 
-export default async function ClassPage({ params }: { params: { slug: string } }) {
+export default async function ClassPage({ params }: PageProps<{ slug: string }>) {
   const supabase = createClient();
 
   // ✅ Fetch class using the slug

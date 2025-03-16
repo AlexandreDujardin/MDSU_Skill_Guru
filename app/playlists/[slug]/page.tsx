@@ -1,8 +1,9 @@
 import { notFound } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import { PlaylistDetails } from "@/components/ui/playlists/PlayListDetails";
+import { PageProps } from "next"; // ✅ Ajout de l'import
 
-export default async function PlaylistPage({ params }: { params: { slug: string } }) {
+export default async function PlaylistPage({ params }: PageProps<{ slug: string }>) {
   const supabase = createClient();
 
   // ✅ Fetch the playlist using the slug instead of ID
