@@ -39,10 +39,10 @@ export function PlaylistList({ playlists }: { playlists: any[] }) {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="bg-background-primary" align="end">
                       {/* Modifier Playlist */}
-                      <DropdownMenuItem onClick={() => setOpenEditPlaylist(playlist.id)}>Modifier</DropdownMenuItem>
+                      <DropdownMenuItem className="cursor-pointer" onClick={() => setOpenEditPlaylist(playlist.id)}>Modifier</DropdownMenuItem>
 
                       {/* Supprimer Playlist */}
-                      <DropdownMenuItem className="text-text-error" onClick={async () => await deletePlaylist(playlist.id)}>
+                      <DropdownMenuItem className="text-text-error cursor-pointer" onClick={async () => await deletePlaylist(playlist.id)}>
                         Supprimer
                       </DropdownMenuItem>
                     </DropdownMenuContent>

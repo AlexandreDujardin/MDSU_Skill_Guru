@@ -41,28 +41,30 @@ export default async function OffersPage() {
   }
 
   return (
-    <div className="p-8 min-h-screen">
+    <div className="flex flex-col p-8 min-h-screen">
       {/* Barre de navigation */}
       <Navbar />
 
       {/* Contenu principal */}
-      <div className="container justify-start mx-auto px-6 py-12">
-        <h1 className="text-h1-d font-bold text-text-primary mb-4">
-          Bienvenue chez Skill Guru !
-        </h1>
-        <h2 className="text-text-primary font-bold text-h2-d">
-          Pour bénéficier de l’ensemble de nos fonctionnalités, veuillez sélectionner l’offre de votre choix et souscrire à un abonnement.
-        </h2>
-      </div>
+      <div className="flex-1">
+        <div className="justify-start mx-auto px-6 py-12">
+          <h1 className="text-h1-d font-bold text-text-primary mb-4">
+            Bienvenue chez Skill Guru !
+          </h1>
+          <h2 className="text-text-primary font-bold text-h2-d">
+            Pour bénéficier de l’ensemble de nos fonctionnalités, veuillez sélectionner l’offre de votre choix et souscrire à un abonnement.
+          </h2>
+        </div>
 
-      {/* Affichage des offres */}
-      <div className="container mx-auto px-6">
-        <ProductList />
-        <h2 className="text-text-primary font-bold mt-8 text-h2-d">Avec Skill Guru, l’expertise devient un jeu !</h2>
+        {/* Affichage des offres */}
+        <div className="flex-1 mx-auto px-6">
+          <ProductList />
+          <h2 className="text-text-primary font-bold mt-8 text-h2-d">Avec Skill Guru, l’expertise devient un jeu !</h2>
+        </div>
       </div>
 
       {/* Footer */}
-      <footer className="mt-8 text-center text-text-secondary text-sm py-2 border-t border-border-default">
+      <footer className="mt-8 text-center text-text-secondary text-sm py-2 border-t border-border-default flex items-center justify-center">
         <div className="flex justify-center gap-4 mt-4">
           <a href="#" className="hover:underline">Mentions légales</a>
           <a href="#" className="hover:underline">CGV</a>

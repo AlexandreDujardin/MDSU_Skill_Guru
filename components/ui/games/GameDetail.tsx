@@ -37,7 +37,7 @@ export const GameDetail = ({ title, description, tags = [], video, concept, obje
         {/* 🎥 Section Vidéo + Infos Jeu */}
         <div className="grid grid-cols-1 md:grid-cols-2">
           {/* 📺 Vidéo */}
-          <div className="w-full aspect-video border-none">
+          <div className="w-full h-full aspect-video border-none">
             <iframe
               src={video}
               title={title}

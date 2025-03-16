@@ -1,16 +1,19 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { createClient } from '@/utils/supabase/client';
 import { logout } from '@/app/actions';
-import { Bell, ChevronDown, Search, User } from 'lucide-react';
+import { ChevronDown, Search } from 'lucide-react';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 
 export function Navbar() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userAvatar, setUserAvatar] = useState<string | null>(null);
   const supabase = createClient();
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const [triggerWidth, setTriggerWidth] = useState("auto");
 
   useEffect(() => {
     const fetchSession = async () => {
@@ -19,7 +22,6 @@ export function Navbar() {
       if (session?.user) {
         setIsAuthenticated(true);
 
-        // Fetch user avatar from profile if available
         const { data: profile } = await supabase
           .from('profiles')
           .select('avatar_url')
@@ -32,6 +34,13 @@ export function Navbar() {
 
     fetchSession();
   }, []);
+
+  // Mettre à jour la largeur du menu
+  useEffect(() => {
+    if (triggerRef.current) {
+      setTriggerWidth(`${triggerRef.current.offsetWidth}px`);
+    }
+  }, [isAuthenticated]);
 
   return (
     <nav className="fixed top-0 left-0 w-full h-16 bg-white shadow-md flex items-center px-6 z-50">
@@ -62,15 +71,39 @@ export function Navbar() {
           </span>
         </button>
 
-        {/* Account Button */}
+        {/* Account Button with Dropdown */}
         {isAuthenticated ? (
-          <Button variantType="primary">
-            <Link href="/account" className="flex justify-evenly items-center text-white px-4 py-2 rounded-md gap-2">
-              <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/icons/account.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpY29ucy9hY2NvdW50LnN2ZyIsImlhdCI6MTc0MjEwMDg4MCwiZXhwIjoxNzczNjM2ODgwfQ.d4zxcXJeJnPSBt465nDZ4MY7Z_d-GnzORc8sjP_HGY8" alt="Mon compte" className="h-6" />
-              Mon compte
-              <ChevronDown size={18} />
-            </Link>
-          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button ref={triggerRef} variantType="primary" className="flex items-center gap-2">
+                {userAvatar ? (
+                  <img src={userAvatar} alt="Avatar" className="w-8 h-8 rounded-full border border-gray-300" />
+                ) : (
+                  <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/icons/account.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpY29ucy9hY2NvdW50LnN2ZyIsImlhdCI6MTc0MjEwMDg4MCwiZXhwIjoxNzczNjM2ODgwfQ.d4zxcXJeJnPSBt465nDZ4MY7Z_d-GnzORc8sjP_HGY8" alt="Mon compte" className="h-6" />
+                )}
+                Mon compte
+                <ChevronDown size={18} />
+              </Button>
+            </DropdownMenuTrigger>
+
+            <DropdownMenuContent align="end" style={{ minWidth: triggerWidth }} className='bg-button-primary text-text-alternative'>
+              <DropdownMenuItem className="cursor-pointer" asChild>
+                <Link href="/account">Infos compte</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem className="cursor-pointer" asChild>
+                <Link href="/account/subscription">Mon abonnement</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={async () => {
+                  await logout();
+                  setIsAuthenticated(false);
+                }}
+                className="cursor-pointer"
+              >
+                Se déconnecter
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         ) : (
           <Button asChild>
             <Link href="/auth/sign-in">Connexion</Link>

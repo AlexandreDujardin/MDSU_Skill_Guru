@@ -8,6 +8,7 @@ import { removeGameFromPlaylist } from "@/app/actions/playlists";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Trash2 } from "lucide-react";
 import { GameCard } from "../games/GameCard";
+import { ToggleView } from "../games/ToggleView";
 
 const supabase = createClient();
 
@@ -21,8 +22,15 @@ interface Game {
   slug: string;
 }
 
-export function PlaylistDetails({ playlist }: { playlist: any }) {
-  // ✅ Définition du type correct pour playlistData
+interface Playlist {
+  id: string;
+  name: string;
+  is_favorite: boolean;
+  slug: string;
+}
+
+export function PlaylistDetails({ playlist }: { playlist: Playlist }) {
+  const [view, setView] = useState<"list" | "grid">("grid");
   const [playlistData, setPlaylistData] = useState<{ 
     id: string; 
     name: string; 
@@ -56,6 +64,46 @@ export function PlaylistDetails({ playlist }: { playlist: any }) {
     fetchPlaylist();
   }, [playlist.id]);
 
+  useEffect(() => {
+    if (!playlist.id) return;
+
+    const channel = supabase
+      .channel(`playlist_games:${playlist.id}`)
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'playlist_games', filter: `playlist_id=eq.${playlist.id}` },
+        async (payload) => {
+          console.log("🔄 Realtime update received:", payload);
+
+          if (payload.eventType === "INSERT") {
+            // ✅ Fetch new game data
+            const { data: newGame } = await supabase
+              .from("games")
+              .select("*")
+              .eq("id", payload.new.game_id)
+              .single();
+
+            if (newGame) {
+              setPlaylistData((prev) => prev 
+                ? { ...prev, games: [...prev.games, newGame] }
+                : prev
+              );
+            }
+          } else if (payload.eventType === "DELETE") {
+            setPlaylistData((prev) => prev 
+              ? { ...prev, games: prev.games.filter((g) => g.id !== payload.old?.game_id) }
+              : prev
+            );
+          }
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [playlist.id]);
+
   if (!playlistData) {
     return <p className="text-center text-gray-500">Chargement...</p>;
   }
@@ -80,10 +128,10 @@ export function PlaylistDetails({ playlist }: { playlist: any }) {
 
       {/* 🎮 Liste des jeux */}
       <div className="border rounded-lg p-6 bg-background-surface w-full">
-        <div className="flex justify-end items-center mb-4">
+        <div className="flex justify-end items-center mb-4 gap-4">
+          <ToggleView onChange={setView}/>
           <AddGamesToPlaylist playlistId={playlistData.id} />
         </div>
-
         {playlistData.games.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {playlistData.games.map((game: Game) => (
@@ -96,7 +144,7 @@ export function PlaylistDetails({ playlist }: { playlist: any }) {
                   tags={game.tags || []}
                   thumbnail={game.thumbnail}
                   slug={game.slug}
-                  view="grid"
+                  view={view}
                 />
                 
                 {/* ❌ Remove Button */}
@@ -120,9 +168,6 @@ export function PlaylistDetails({ playlist }: { playlist: any }) {
         ) : (
           <div className="text-center w-full">
             <div className="flex flex-row justify-end items-center space-x-4">
-              <Button variantType="secondary" asChild>
-                <AddGamesToPlaylist playlistId={playlistData.id} />
-              </Button>
             </div>
             <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/playlists/add_game.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJwbGF5bGlzdHMvYWRkX2dhbWUuc3ZnIiwiaWF0IjoxNzQyMTAxMDgwLCJleHAiOjE3NzM2MzcwODB9.8OYBS_fuDweU9M_hJFvi-obFQITWHXz5Yi9HaIKXDLo" alt="No games" className="w-62 mx-auto mt-4" />
             <p className="text-lg text-gray-600">Vous n’avez pas encore ajouté de jeu dans cette playlist.</p>

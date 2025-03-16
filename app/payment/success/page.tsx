@@ -51,14 +51,13 @@ export default async function SuccessPage({ searchParams }: { searchParams: Prom
         .eq('id', session.user.id);
 
       return (
-        <div className="max-w-md mx-auto text-center">
+        <div className="max-w-md mx-auto text-center flex items-center justify-center flex-col space-y-4">
           <div className="rounded-full h-12 w-12 bg-green-100 text-green-600 mx-auto mb-4 flex items-center justify-center">
             <CheckIcon className="h-6 w-6" />
           </div>
           <h1 className="text-2xl font-bold mb-4">Paiement réussi !</h1>
           <p className="text-muted-foreground mb-8">
             Merci pour votre achat. Vous avez maintenant accès à toutes les fonctionnalités liées à votre abonnement.
-            <span className="block mt-2">Order ID: {checkoutSession.id}</span>
           </p>
           <Button asChild>
             <Link href="/">Retour à l'accueil</Link>

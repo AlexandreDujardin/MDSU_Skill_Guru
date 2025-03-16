@@ -8,7 +8,6 @@ import { createClient } from '@/utils/supabase/client';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Button } from '@/components/ui/button';
 import { MoreVertical } from 'lucide-react';
 import { EditClassForm } from './edit-class-form';
 import { deleteClass } from '@/app/actions/classes';
@@ -48,34 +47,45 @@ export function ClassList() {
   // ✅ Fetch classes initially
   const fetchClassesAndStudents = async () => {
     setLoading(true);
-    
+  
+    // ✅ Récupération de l'utilisateur connecté
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session?.user) {
+      console.error("❌ Erreur: utilisateur non connecté.");
+      setLoading(false);
+      return;
+    }
+  
+    // ✅ Filtrer les classes par user_id
     const { data, error } = await supabase
       .from('classes')
-      .select('*, students(id, custom_id, first_name, last_name, class_id)') // Fetch students inside classes
+      .select('*, students(id, custom_id, first_name, last_name, class_id)')
+      .eq("user_id", session.user.id) // ✅ Ajout du filtre
       .order('created_at', { ascending: true });
-
+  
     if (error) {
-      console.error('❌ Error fetching classes:', error);
+      console.error('❌ Erreur lors de la récupération des classes:', error);
     } else {
-      // ✅ Transform Data to Extract Students
+      // ✅ Transformer les données pour inclure les étudiants et attribuer le bon contexte
       const allStudents = data?.flatMap((classItem) => 
         classItem.students.map((student: Student) => ({
           ...student,
-          class_name: classItem.name, // ✅ Assign class name
+          class_name: classItem.name, // ✅ Assignation du nom de la classe
           niveau: classItem.niveau_classe,
           ecole: classItem.nom_ecole,
         }))
       ) || [];
-
+  
       setClassList(
         data?.map((classItem) => ({
           ...classItem,
-          students: classItem.students ?? [], // Ensure students array
+          students: classItem.students ?? [], // Assurer un tableau vide si aucun étudiant
         })) ?? []
       );
-
-      setStudents(allStudents); // ✅ Store extracted students
+  
+      setStudents(allStudents);
     }
+  
     setLoading(false);
   };
 
@@ -180,14 +190,14 @@ export function ClassList() {
                   <div className="absolute top-3 right-3">
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
-                        <Button>
-                          <MoreVertical size={18} />
-                        </Button>
+                      <button className="p-2 rounded-md bg-background-primary">
+                        <MoreVertical size={20} />
+                      </button>
                       </DropdownMenuTrigger>
 
                       <DropdownMenuContent align="end">
-                        <DropdownMenuItem onClick={() => setOpenEditModal(classItem.id)}>Modifier</DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => handleDeleteClass(classItem.id)} className="text-red-600">
+                        <DropdownMenuItem onClick={() => setOpenEditModal(classItem.id)} className="cursor-pointer">Modifier</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => handleDeleteClass(classItem.id)} className="text-text-error cursor-pointer">
                           Supprimer
                         </DropdownMenuItem>
                       </DropdownMenuContent>

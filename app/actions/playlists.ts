@@ -11,11 +11,13 @@ export async function createOrUpdatePlaylist(formData: FormData) {
   const { data: { session }, error: sessionError } = await supabase.auth.getSession();
   if (sessionError || !session?.user) throw new Error('Not authenticated');
 
+  const slug = name.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
+
   if (playlistId) {
     // Update an existing playlist
     const { error } = await supabase
       .from('playlists')
-      .update({ name })
+      .update({ name, slug })
       .eq('id', playlistId)
       .eq('user_id', session.user.id);
     
@@ -27,6 +29,7 @@ export async function createOrUpdatePlaylist(formData: FormData) {
       .insert({
         name,
         user_id: session.user.id,
+        slug,
       });
 
     if (error) throw error;
