@@ -8,7 +8,7 @@ import { CheckIcon } from 'lucide-react';
 export default async function SuccessPage({
   searchParams,
 }: {
-  searchParams: { session_id: string };
+  searchParams?: { session_id?: string };
 }) {
   const supabase = createClient();
   const { data: { session } } = await supabase.auth.getSession();
@@ -17,20 +17,20 @@ export default async function SuccessPage({
     redirect('/');
   }
 
-  const sessionId = searchParams.session_id;
+  const sessionId = searchParams?.session_id; // ✅ Ajout de "?" pour éviter undefined
 
   try {
     if (sessionId) {
-      // Retrieve the checkout session and subscription
+      // Récupération de la session de paiement
       const checkoutSession = await stripe.checkout.sessions.retrieve(sessionId, {
         expand: ['subscription', 'subscription.default_payment_method', 'subscription.items'],
       });
 
-      const subscription = checkoutSession.subscription;
+      const subscription = checkoutSession.subscription as any; // ✅ Ajout de "as any" pour éviter une erreur de typage
 
-      // Fetch product information separately for each item
+      // Récupération des informations du produit
       const itemsWithProducts = await Promise.all(
-        subscription.items.data.map(async (item) => {
+        subscription.items.data.map(async (item: any) => {
           const price = item.price;
           const product = await stripe.products.retrieve(price.product as string);
           return {
@@ -41,7 +41,7 @@ export default async function SuccessPage({
         })
       );
 
-      // Update user profile with subscription details
+      // Mise à jour du profil utilisateur
       await supabase
         .from('profiles')
         .update({
@@ -60,11 +60,11 @@ export default async function SuccessPage({
           </div>
           <h1 className="text-2xl font-bold mb-4">Paiement réussi !</h1>
           <p className="text-muted-foreground mb-8">
-            Merci pour votre achat. Vous avez maintenant accès à toutes les fonctionnalités liés à votre abonnemment.
+            Merci pour votre achat. Vous avez maintenant accès à toutes les fonctionnalités liées à votre abonnement.
             <span className="block mt-2">Order ID: {checkoutSession.id}</span>
           </p>
           <Button asChild>
-            <Link href="/">Retour à l'acceuil</Link>
+            <Link href="/">Retour à l'accueil</Link>
           </Button>
         </div>
       );
@@ -73,4 +73,15 @@ export default async function SuccessPage({
     console.error('Error retrieving checkout session:', error);
     redirect('/payment/canceled');
   }
+
+  // ✅ Ajout d'un return par défaut si `sessionId` est inexistant
+  return (
+    <div className="text-center mt-10">
+      <h1 className="text-xl text-red-500">Erreur de paiement</h1>
+      <p className="text-gray-500">Aucune session de paiement trouvée.</p>
+      <Button asChild>
+        <Link href="/">Retour à l'accueil</Link>
+      </Button>
+    </div>
+  );
 }
