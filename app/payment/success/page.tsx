@@ -5,11 +5,11 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { CheckIcon } from 'lucide-react';
 
-export default async function SuccessPage({
-  searchParams,
-}: {
-  searchParams?: { session_id?: string };
-}) {
+interface SuccessPageProps {
+  searchParams: Record<string, string | undefined>; // ✅ Correction ici
+}
+
+export default async function SuccessPage({ searchParams }: SuccessPageProps) {
   const supabase = createClient();
   const { data: { session } } = await supabase.auth.getSession();
 
@@ -17,7 +17,7 @@ export default async function SuccessPage({
     redirect('/');
   }
 
-  const sessionId = searchParams?.session_id; // ✅ Ajout de "?" pour éviter undefined
+  const sessionId = searchParams.session_id; // ✅ searchParams est maintenant bien typé
 
   try {
     if (sessionId) {
@@ -26,7 +26,7 @@ export default async function SuccessPage({
         expand: ['subscription', 'subscription.default_payment_method', 'subscription.items'],
       });
 
-      const subscription = checkoutSession.subscription as any; // ✅ Ajout de "as any" pour éviter une erreur de typage
+      const subscription = checkoutSession.subscription as any;
 
       // Récupération des informations du produit
       const itemsWithProducts = await Promise.all(
@@ -74,7 +74,6 @@ export default async function SuccessPage({
     redirect('/payment/canceled');
   }
 
-  // ✅ Ajout d'un return par défaut si `sessionId` est inexistant
   return (
     <div className="text-center mt-10">
       <h1 className="text-xl text-red-500">Erreur de paiement</h1>
