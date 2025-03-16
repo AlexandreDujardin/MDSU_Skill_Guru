@@ -29,7 +29,7 @@ export const RecommendedGames = () => {
   }, []);
 
   return (
-    <section className="mt-6 bg-background-surface p-6 rounded-lg border-border-default border">
+    <section className="bg-background-surface p-6 rounded-lg border-border-default border">
       <h2 className="text-2xl font-bold text-text-primary">Nos recommandations</h2>
       <p className="text-gray-500 mb-4">
         Nous vous proposons des jeux adaptés à votre profil et vos domaines d’expertise

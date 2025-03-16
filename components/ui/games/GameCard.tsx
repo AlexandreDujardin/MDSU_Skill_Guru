@@ -7,7 +7,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { toggleGameInFavorites } from "@/app/actions/playlists";
 import { createClient } from "@/utils/supabase/client";
-import { imageConfigDefault } from "next/dist/shared/lib/image-config";
 
 const supabase = createClient();
 
@@ -83,12 +82,12 @@ export const GameCard = ({ id, title, description, tags, thumbnail, slug }: Game
             <p className="text-sm text-gray-600 line-clamp-2">{description}</p>
           </CardHeader>
 
-          {/* Liste des Tags */}
+          {/* Liste des Tags (Fix: Add a unique `key`) */}
           <CardContent className="p-0">
             <div className="flex flex-wrap gap-2 mt-2">
               {tags.length > 0 ? (
                 tags.map((tag, index) => (
-                  <Badge id={tag + index} className="bg-button-primary text-text-alternative text-xs px-3 py-1 rounded-full gap-2">
+                  <Badge key={tag + index} className="bg-button-primary text-text-alternative text-xs px-3 py-1 rounded-full gap-2">
                     <img src="/images/games/tags.svg" alt="tag" className="h-4"/>
                     {tag}
                   </Badge>

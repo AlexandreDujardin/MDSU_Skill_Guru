@@ -18,13 +18,14 @@ export function AddEditPlaylist({ playlist }: AddEditPlaylistProps) {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant={playlist ? 'outline' : 'default'}>
-          {playlist ? 'Modifier' : 'Ajouter une playlist'}
+        <Button type='secondary'>
+          <img src="/images/classes/add.svg" alt="Ajouter" className="h-6" />
+          Créer une playlist
         </Button>
       </SheetTrigger>
       <SheetContent side="right">
         <SheetHeader>
-          <SheetTitle>{playlist ? 'Modifier Playlist' : 'Nouvelle Playlist'}</SheetTitle>
+          <SheetTitle className='text-text-primary'>{playlist ? 'Modifier une playlist' : 'Créer une playlist'}</SheetTitle>
         </SheetHeader>
         <form
           action={async (formData) => {
@@ -39,9 +40,12 @@ export function AddEditPlaylist({ playlist }: AddEditPlaylistProps) {
             <Label htmlFor="name">Nom</Label>
             <Input id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} required />
           </div>
-          <Button type="submit" className="w-full">
-            {playlist ? 'Mettre à jour' : 'Créer'}
-          </Button>
+          <div className='flex justify-end gap-2'>
+            <Button type='secondary' onClick={() => setOpen(false)}>Annuler</Button>
+            <Button type="primary">
+              {playlist ? 'Mettre à jour' : 'Créer'}
+            </Button>
+          </div>
         </form>
       </SheetContent>
     </Sheet>

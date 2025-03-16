@@ -30,7 +30,7 @@ export default function GameCatalog() {
   }, []);
 
   return (
-    <div className="p-6 space-y-6 bg-background-primary">
+    <div className="space-y-6 bg-background-primary">
       {/* 🔥 Section des jeux recommandés */}
       <RecommendedGames />
 
