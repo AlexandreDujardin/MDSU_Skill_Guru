@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { XIcon } from 'lucide-react'
 
 export default async function CanceledPage() {
-  const supabase = createClient()
+  const supabase = await createClient()
   const { data: { session } } = await supabase.auth.getSession()
 
   if (!session) {

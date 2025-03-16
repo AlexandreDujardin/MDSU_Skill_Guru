@@ -19,7 +19,7 @@ export function EditStudentForm({ studentId, initialFirstName, initialLastName }
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant="outline" size="sm">Modifier</Button>
+        <Button  size="sm">Modifier</Button>
       </SheetTrigger>
       <SheetContent side="right">
         <SheetHeader>

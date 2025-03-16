@@ -16,7 +16,7 @@ export default function Home() {
                 <Button asChild size="lg">
                   <Link href="/auth/sign-up">Commence ton ascenscion</Link>
                 </Button>
-                <Button asChild size="lg" variant="outline">
+                <Button asChild size="lg" >
                   <Link href="/auth/sign-in">Ose te connecter, VAS-Y!!!!!!!!!!</Link>
                 </Button>
               </div>

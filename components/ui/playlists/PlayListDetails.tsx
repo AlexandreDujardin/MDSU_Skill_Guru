@@ -11,8 +11,26 @@ import { GameCard } from "../games/GameCard";
 
 const supabase = createClient();
 
+// ✅ Définition du type Game
+interface Game {
+  id: string;
+  title: string;
+  description: string;
+  tags: string[];
+  thumbnail: string;
+  slug: string;
+}
+
 export function PlaylistDetails({ playlist }: { playlist: any }) {
-  const [playlistData, setPlaylistData] = useState<any>(null);
+  // ✅ Définition du type correct pour playlistData
+  const [playlistData, setPlaylistData] = useState<{ 
+    id: string; 
+    name: string; 
+    is_favorite: boolean; 
+    slug: string; 
+    games: Game[]; 
+  } | null>(null);
+
   const router = useRouter();
 
   useEffect(() => {
@@ -29,8 +47,8 @@ export function PlaylistDetails({ playlist }: { playlist: any }) {
       if (error) {
         console.error("❌ Error fetching playlist:", error);
       } else {
-        // ✅ Extract and format games properly
-        const games = data?.playlist_games?.map((pg) => pg.games) || [];
+        // ✅ Extraction et formatage des jeux
+        const games = data?.playlist_games?.flatMap((pg) => pg.games) || [];
         setPlaylistData({ ...data, games });
       }
     };
@@ -68,7 +86,7 @@ export function PlaylistDetails({ playlist }: { playlist: any }) {
 
         {playlistData.games.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {playlistData.games.map((game) => (
+            {playlistData.games.map((game: Game) => (
               <div key={game.id} className="relative">
                 {/* ✅ Use GameCard Component */}
                 <GameCard 
@@ -78,20 +96,19 @@ export function PlaylistDetails({ playlist }: { playlist: any }) {
                   tags={game.tags || []}
                   thumbnail={game.thumbnail}
                   slug={game.slug}
+                  view="grid"
                 />
                 
                 {/* ❌ Remove Button */}
                 {!playlistData.is_favorite && (
                   <Button
-                    variant="destructive"
-                    size="xs"
                     className="absolute top-1 right-1"
                     onClick={async () => {
                       await removeGameFromPlaylist(playlistData.id, game.id);
-                      setPlaylistData((prev) => ({
-                        ...prev,
-                        games: prev.games.filter((g) => g.id !== game.id),
-                      }));
+                      setPlaylistData((prev) => prev 
+                        ? { ...prev, games: prev.games.filter((g) => g.id !== game.id) }
+                        : prev
+                      );
                     }}
                   >
                     <Trash2 size={25} />
@@ -103,7 +120,7 @@ export function PlaylistDetails({ playlist }: { playlist: any }) {
         ) : (
           <div className="text-center w-full">
             <div className="flex flex-row justify-end items-center space-x-4">
-              <Button type="secondary" asChild>
+              <Button variantType="secondary" asChild>
                 <AddGamesToPlaylist playlistId={playlistData.id} />
               </Button>
             </div>

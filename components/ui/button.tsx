@@ -7,7 +7,7 @@ const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
-      type: {
+      variantType: {
         primary: "rounded-md gap-2 bg-button-primary text-text-alternative hover:bg-button-primary-hover pressed:bg-button-primary-pressed rounded-md gap-2",
         secondary: "rounded-md gap-2 border-2 bg-button-secondary text-button-secondary border-button-primary-secondary hover:bg-background-surface text-text-primary border-button-secondary-hover pressed:bg-button-secondary-disabled border-button-secondary-pressed",
         tertiary: "rounded-md gap-2 bg-button-tertiary text-text-tertiary hover:bg-button-tertiary-hover pressed:bg-button-tertiary-pressed",
@@ -29,7 +29,7 @@ const buttonVariants = cva(
       },
     },
     defaultVariants: {
-      type: "primary",
+      variantType: "primary",
       size: "md",
       variant: "default",
       state: "default",
@@ -44,10 +44,10 @@ interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, type, size, variant, state, asChild = false, ...props }, ref) => {
+  ({ className, type, variantType, size, variant, state, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
     return (
-      <Comp className={cn(buttonVariants({ type, size, variant, state }), className)} ref={ref} {...props} />
+      <Comp className={cn(buttonVariants({ size, variant, state, variantType }), className)} ref={ref} {...props} />
     );
   }
 );

@@ -14,7 +14,6 @@ export const ToggleView = ({ onChange }: ToggleViewProps) => {
     <div className="flex items-center gap-4">
       <Button 
         className="bg-transparent focus:bg-background-elevated focus:border-border-default focus:border hover:bg-transparent  text-text-primary"
-        variant={view === "list" ? "primary" : "secondary"}
         onClick={() => { setView("list"); onChange("list"); }}
       >
         <img src="/images/games/list.svg" alt="liste" />
@@ -26,7 +25,6 @@ export const ToggleView = ({ onChange }: ToggleViewProps) => {
 
       <Button 
         className="bg-transparent focus:bg-background-elevated focus:border-border-default focus:border hover:bg-transparent  text-text-primary"
-        variant={view === "grid" ? "primary" : "secondary"}
         onClick={() => { setView("grid"); onChange("grid"); }}
       >
         <img src="/images/games/grid.svg" alt="grille" />

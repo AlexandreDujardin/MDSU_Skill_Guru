@@ -5,14 +5,14 @@ import { stripe } from '@/utils/stripe';
 import { redirect } from 'next/navigation';
 
 export async function logout() {
-  const supabase = createClient();
+  const supabase = await createClient();
   await supabase.auth.signOut();
   redirect('/auth/sign-in');
 }
 
 export async function createCheckoutSession(priceId: string) {
   try {
-    const supabase = createClient();
+    const supabase = await createClient();
     const { data: { session } } = await supabase.auth.getSession();
 
     if (!session?.user) {

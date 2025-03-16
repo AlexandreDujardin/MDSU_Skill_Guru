@@ -25,7 +25,7 @@ export function AddClassForm() {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button type='secondary' className="flex justify-evenly items-center gap-2">
+        <Button variantType="secondary" className="flex justify-evenly items-center gap-2">
           <img src="/images/classes/add.svg" alt="ajouter classe" className="h-6" />
           Créer une classe
         </Button>
@@ -86,8 +86,8 @@ export function AddClassForm() {
           <hr />
 
           <div className='flex justify-end gap-2'>
-            <Button type="secondary" onClick={() => setOpen(false)}>Annuler</Button>
-            <Button type="primary">Confirmer</Button>
+            <Button variantType="secondary" onClick={() => setOpen(false)}>Annuler</Button>
+            <Button variantType="primary">Confirmer</Button>
           </div>
         </form>
       </SheetContent>

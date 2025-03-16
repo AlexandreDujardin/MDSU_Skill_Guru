@@ -142,7 +142,7 @@ export function ClassDetails({ classItem }: { classItem: Class }) {
               />
             </div>
 
-            <Button type="secondary" className="mt-4" asChild>
+            <Button variantType="secondary" className="mt-4" asChild>
               <AddStudentForm classId={classItem.id} />
             </Button>
           </div>
@@ -155,13 +155,13 @@ export function ClassDetails({ classItem }: { classItem: Class }) {
                 </p>
                 <div className="flex gap-2">
                   {selectedStudents.length === 1 && (
-                    <Button type='tertiary' className='font-semibold'>
+                    <Button variantType="tertiary" className='font-semibold'>
                       <img src="/images/classes/pen_update.svg" alt="update" />
                       Modifier
                     </Button>
                   )}
                   {selectedStudents.length > 0 && (
-                    <Button type='tertiary' className='font-semibold' onClick={handleDelete}>
+                    <Button variantType="tertiary" className='font-semibold' onClick={handleDelete}>
                       <img src="/images/classes/trashcan.svg" alt="delete" />
                       Supprimer
                     </Button>
@@ -222,7 +222,7 @@ export function ClassDetails({ classItem }: { classItem: Class }) {
         <div className="text-center border rounded-lg p-6 bg-background-surface h-[calc(90vh-10rem)] w-full">
           <div className='flex flex-row justify-between items-center space-x-4'>
             <p className="text-lg text-gray-600">Vous n’avez pas encore créé de profils élèves.</p>
-            <Button type="secondary" asChild>
+            <Button variantType="secondary" asChild>
               <AddStudentForm classId={classItem.id} />
             </Button>
           </div>

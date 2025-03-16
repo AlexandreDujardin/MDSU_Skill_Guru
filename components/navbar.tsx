@@ -64,7 +64,7 @@ export function Navbar() {
 
         {/* Account Button */}
         {isAuthenticated ? (
-          <Button type='primary'>
+          <Button variantType="primary">
             <Link href="/account" className="flex justify-evenly items-center text-white px-4 py-2 rounded-md gap-2">
               <img src="/images/icons/account.svg" alt="Mon compte" className="h-6" />
               Mon compte

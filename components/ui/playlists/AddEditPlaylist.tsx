@@ -18,7 +18,7 @@ export function AddEditPlaylist({ playlist }: AddEditPlaylistProps) {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button type='secondary'>
+        <Button variantType="secondary">
           <img src="/images/classes/add.svg" alt="Ajouter" className="h-6" />
           Créer une playlist
         </Button>
@@ -41,8 +41,8 @@ export function AddEditPlaylist({ playlist }: AddEditPlaylistProps) {
             <Input id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} required />
           </div>
           <div className='flex justify-end gap-2'>
-            <Button type='secondary' onClick={() => setOpen(false)}>Annuler</Button>
-            <Button type="primary">
+            <Button variantType="secondary" onClick={() => setOpen(false)}>Annuler</Button>
+            <Button variantType="primary">
               {playlist ? 'Mettre à jour' : 'Créer'}
             </Button>
           </div>

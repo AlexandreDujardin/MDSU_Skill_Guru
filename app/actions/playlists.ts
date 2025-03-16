@@ -4,7 +4,7 @@ import { createClient } from '@/utils/supabase/server';
 import { revalidatePath } from 'next/cache';
 
 export async function createOrUpdatePlaylist(formData: FormData) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const name = formData.get('name') as string;
   const playlistId = formData.get('playlistId') as string | null;
 
@@ -36,7 +36,7 @@ export async function createOrUpdatePlaylist(formData: FormData) {
 }
 
 export async function deletePlaylist(playlistId: string) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data: { session }, error: sessionError } = await supabase.auth.getSession();
   if (sessionError || !session?.user) throw new Error('Not authenticated');
 
@@ -63,7 +63,7 @@ export async function deletePlaylist(playlistId: string) {
 }
 
 export async function addGameToPlaylist(playlistId: string, gameId: string) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data: { session }, error: sessionError } = await supabase.auth.getSession();
   
   if (sessionError || !session?.user) throw new Error("Not authenticated");
@@ -93,7 +93,7 @@ export async function addGameToPlaylist(playlistId: string, gameId: string) {
 
 
 export async function removeGameFromPlaylist(playlistId: string, gameId: string) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data: { session }, error: sessionError } = await supabase.auth.getSession();
   if (sessionError || !session?.user) throw new Error('Not authenticated');
 
@@ -116,7 +116,7 @@ export async function toggleGameInFavorites(gameId: string) {
   }
 
 
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data: { session }, error: sessionError } = await supabase.auth.getSession();
   if (sessionError || !session?.user) throw new Error('Not authenticated');
 
@@ -142,6 +142,10 @@ export async function toggleGameInFavorites(gameId: string) {
     
     if (error) throw error;
     favoritesPlaylist = data;
+  }
+
+  if (!favoritesPlaylist) {
+    throw new Error("ERROR: Failed to retrieve or create the Favorites playlist.");
   }
 
   // Check if the game is already in favorites

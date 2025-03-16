@@ -20,11 +20,11 @@ export default function NotFoundPage() {
 
       {/* 🔄 Boutons pour revenir en arrière ou aller à l'accueil */}
       <div className="mt-6 flex gap-4">
-        <Button onClick={() => router.back()} type="secondary">
+        <Button onClick={() => router.back()} variantType="secondary">
           Retour
         </Button>
         <Link href="/">
-          <Button type="primary">Retour à l'accueil</Button>
+          <Button variantType="primary">Retour à l'accueil</Button>
         </Link>
       </div>
     </div>

@@ -4,7 +4,7 @@ import { createClient } from '@/utils/supabase/server'
 import { revalidatePath } from 'next/cache'
 
 export async function addClass(formData: FormData) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const name = formData.get('name') as string;
   const nom_ecole = formData.get('nom_ecole') as string;
   const niveau_classe = formData.get('niveau_classe') as string;
@@ -35,7 +35,7 @@ export async function addClass(formData: FormData) {
 }
 
 export async function deleteClass(classId: string) {
-  const supabase = createClient()
+  const supabase = await createClient()
 
   const { error } = await supabase
     .from('classes')
@@ -48,7 +48,7 @@ export async function deleteClass(classId: string) {
 }
 
 export async function addStudents(formData: FormData) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const classId = formData.get('classId') as string;
   const students = JSON.parse(formData.get('students') as string); // Parse the array of students
 
@@ -103,7 +103,7 @@ export async function addStudents(formData: FormData) {
 
 
 export async function deleteStudent(studentId: string) {
-  const supabase = createClient()
+  const supabase = await createClient()
 
   const { error } = await supabase
     .from('students')
@@ -116,7 +116,7 @@ export async function deleteStudent(studentId: string) {
 }
 
 export async function updateClass(formData: FormData) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const classId = formData.get('classId') as string;
   const name = formData.get('name') as string;
 
@@ -131,7 +131,7 @@ export async function updateClass(formData: FormData) {
 }
 
 export async function updateStudent(formData: FormData) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const studentId = formData.get('studentId') as string;
   const firstName = formData.get('firstName') as string;
   const lastName = formData.get('lastName') as string;

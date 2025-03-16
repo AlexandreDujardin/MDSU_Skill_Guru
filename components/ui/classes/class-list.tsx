@@ -23,6 +23,9 @@ interface Student {
   first_name: string;
   last_name: string;
   class_id: string;
+  class_name?: string; // ✅ Ajouté
+  niveau?: string; // ✅ Ajouté
+  ecole?: string; // ✅ Ajouté
 }
 
 interface Class {
@@ -56,7 +59,7 @@ export function ClassList() {
     } else {
       // ✅ Transform Data to Extract Students
       const allStudents = data?.flatMap((classItem) => 
-        classItem.students.map((student) => ({
+        classItem.students.map((student: Student) => ({
           ...student,
           class_name: classItem.name, // ✅ Assign class name
           niveau: classItem.niveau_classe,
@@ -177,7 +180,7 @@ export function ClassList() {
                   <div className="absolute top-3 right-3">
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="icon">
+                        <Button>
                           <MoreVertical size={18} />
                         </Button>
                       </DropdownMenuTrigger>

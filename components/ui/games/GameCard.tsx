@@ -17,9 +17,10 @@ interface GameCardProps {
   tags: string[];
   thumbnail: string;
   slug: string;
+  view: string;
 }
 
-export const GameCard = ({ id, title, description, tags, thumbnail, slug }: GameCardProps) => {
+export const GameCard = ({ id, title, description, tags, thumbnail, slug, view }: GameCardProps) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {

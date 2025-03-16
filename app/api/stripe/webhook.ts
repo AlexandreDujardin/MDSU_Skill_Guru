@@ -1,16 +1,14 @@
 import { NextResponse } from "next/server";
 import { stripe } from "@/utils/stripe";
-import { createServerClient } from "@/utils/supabase/server";
+import { createClient } from "@/utils/supabase/server";
+import { Stripe } from "stripe"; // ✅ Import des types Stripe
 
 export async function POST(req: Request) {
   const body = await req.text();
   const signature = req.headers.get("stripe-signature")!;
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
+  const supabase = await createClient();
 
-  let event;
+  let event: Stripe.Event;
   try {
     event = stripe.webhooks.constructEvent(
       body,
@@ -22,18 +20,19 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Webhook signature verification failed" }, { status: 400 });
   }
 
-  // Extract Stripe event type
+  // ✅ Extraction et typage du Stripe Event
   const eventType = event.type;
-  const data = event.data.object;
+  const data = event.data.object as any; // ⚠️ Ajout d'un cast temporaire
+
   console.log(`🔔 Stripe Webhook Received: ${eventType}`);
 
   try {
     if (eventType === "checkout.session.completed") {
-      // When a user completes a checkout, update Supabase
-      const customerId = data.customer;
-      const userId = data.client_reference_id;
-      const subscriptionId = data.subscription;
-      const priceId = data?.metadata?.price_id;
+      const session = data as Stripe.Checkout.Session; // ✅ Cast vers Stripe.Checkout.Session
+      const customerId = session.customer as string;
+      const userId = session.client_reference_id;
+      const subscriptionId = session.subscription as string;
+      const priceId = session.metadata?.price_id;
 
       if (userId) {
         await supabase
@@ -48,9 +47,8 @@ export async function POST(req: Request) {
     }
 
     if (eventType === "invoice.payment_succeeded") {
-      // When an invoice is paid, update subscription info
-      const subscriptionId = data.subscription;
-      const customerId = data.customer;
+      const invoice = data as Stripe.Invoice; // ✅ Cast vers Stripe.Invoice
+      const customerId = invoice.customer as string;
 
       const { data: userProfile } = await supabase
         .from("profiles")
@@ -70,8 +68,8 @@ export async function POST(req: Request) {
       eventType === "customer.subscription.deleted" ||
       eventType === "invoice.payment_failed"
     ) {
-      // When a subscription is canceled or payment fails
-      const customerId = data.customer;
+      const subscription = data as Stripe.Subscription; // ✅ Cast vers Stripe.Subscription
+      const customerId = subscription.customer as string;
 
       const { data: userProfile } = await supabase
         .from("profiles")

@@ -68,7 +68,7 @@ export function AddStudentForm({ classId }: AddStudentFormProps) {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button type='secondary' size="lg">
+        <Button variantType="secondary" size="lg">
           <img src="/images/classes/add.svg" alt="ajouter" />
           Créer des profils élèves
         </Button>
@@ -143,11 +143,11 @@ export function AddStudentForm({ classId }: AddStudentFormProps) {
               ))}
 
               <div className='flex justify-end gap-2'>
-                <Button type="secondary" variant="secondary" onClick={handleAddStudentField}>
+                <Button variantType="secondary" onClick={handleAddStudentField}>
                   <img src="/images/classes/add.svg" alt="ajouter" />
                   Ajouter un autre élève
                 </Button>
-                <Button type="primary">Valider</Button>
+                <Button variantType="primary">Valider</Button>
               </div>
             </form>
           </TabsContent>

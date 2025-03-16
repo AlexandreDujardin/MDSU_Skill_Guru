@@ -32,7 +32,7 @@ export function AddGamesToPlaylist({ playlistId }: AddGamesToPlaylistProps) {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button type='secondary' size="sm" className='min-w-fit'>Ajouter des jeux</Button>
+        <Button variantType="secondary" size="sm" className='min-w-fit'>Ajouter des jeux</Button>
       </SheetTrigger>
       <SheetContent side="right">
         <SheetHeader>
@@ -46,8 +46,6 @@ export function AddGamesToPlaylist({ playlistId }: AddGamesToPlaylistProps) {
                 <span>{game.title}</span>
               </div>
               <Button
-                variant="default"
-                size="sm"
                 onClick={() => addGameToPlaylist(playlistId, game.id)}
               >
                 Ajouter

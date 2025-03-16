@@ -87,7 +87,7 @@ export default function SignInForm() {
           </div>
         </div>
         <div className='flex justify-end'>
-          <Button type="primary" className="flex items-center gap-2" disabled={loading}>
+          <Button variantType="primary" className="flex items-center gap-2" disabled={loading}>
             {loading ? 'Chargement...' : 'Me connecter'}
           </Button>
         </div>

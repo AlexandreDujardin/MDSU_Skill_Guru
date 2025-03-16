@@ -8,8 +8,17 @@ import { createClient } from "@/utils/supabase/client";
 
 const supabase = createClient();
 
+interface Game {
+  id: string;
+  title: string;
+  description: string;
+  tags: string[];
+  thumbnail: string;
+  slug: string;
+}
+
 export default function GameCatalog() {
-  const [games, setGames] = useState([]);
+  const [games, setGames] = useState<Game[]>([]);
   const [view, setView] = useState<"list" | "grid">("grid");
 
   useEffect(() => {

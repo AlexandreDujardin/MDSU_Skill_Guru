@@ -67,11 +67,11 @@ export const GameDetail = ({ title, description, tags = [], video, concept, obje
         <div className=" flex items-center justify-end">
           {/* 🎮 Boutons Actions */}
           <div className="flex gap-4 mt-4">
-              <Button type="secondary" className="flex items-center gap-2 w-min-content">
+              <Button variantType="secondary" className="flex items-center gap-2 w-min-content">
                 <img src="/images/games/settings.svg" alt="programmer" className="h-6"/>
                 Programmer une session
               </Button>
-              <Button type="primary" className="flex items-center gap-2 w-min-content">
+              <Button variantType="primary" className="flex items-center gap-2 w-min-content">
               <img src="/images/games/play.svg" alt="programmer" className="h-6"/>
                 Lancer le jeu
               </Button>

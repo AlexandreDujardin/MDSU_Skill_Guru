@@ -4,7 +4,7 @@ import { PlaylistList } from "@/components/ui/playlists/PlaylistList";
 import { AddEditPlaylist } from "@/components/ui/playlists/AddEditPlaylist";
 
 export default async function PlaylistPage() {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   // ✅ Get user session
   const { data: { session }, error: sessionError } = await supabase.auth.getSession();

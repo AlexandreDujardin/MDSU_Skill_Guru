@@ -179,10 +179,10 @@ export default function SignUpForm() {
 
             {/* Navigation Buttons */}
             <div className="flex justify-between">
-              <Button onClick={() => setStep(1)} variant="outline" className="flex items-center gap-2">
+              <Button onClick={() => setStep(1)}  className="flex items-center gap-2">
                 <ChevronLeft size={18} /> Retour
               </Button>
-              <Button type="primary" className="flex items-center gap-2">
+              <Button variantType="primary" className="flex items-center gap-2">
                 Créer mon compte <ChevronRight size={18} />
               </Button>
             </div>

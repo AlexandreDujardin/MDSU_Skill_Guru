@@ -23,12 +23,12 @@ export default function VerifyEmail() {
       </p>
       <div className="flex justify-between mt-6">
         <Link href="#">
-          <Button type='secondary'>
+          <Button variantType="secondary">
             Renvoyer le mail
           </Button>
         </Link>
         <Link href="/auth/sign-in">
-          <Button type='primary'>
+          <Button variantType="primary">
             Retour à la page de connexion
           </Button>
         </Link>

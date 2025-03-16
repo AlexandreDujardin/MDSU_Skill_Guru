@@ -5,7 +5,7 @@ import { ProductList } from '@/components/ui/products/product-list';
 import { Navbar } from '@/components/navbar';
 
 export default async function OffersPage() {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   if (!supabase) {
     console.error("❌ Supabase client not initialized");

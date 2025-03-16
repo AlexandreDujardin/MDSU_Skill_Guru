@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import React from "react";
+import { JSX } from "react";
 
 interface TypographyProps {
   as?: keyof JSX.IntrinsicElements;

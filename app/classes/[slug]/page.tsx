@@ -1,16 +1,20 @@
 import { notFound } from 'next/navigation';
 import { createClient } from '@/utils/supabase/server';
 import { ClassDetails } from '@/components/ui/classes/class-details';
-import { PageProps } from "next";
 
-export default async function ClassPage({ params }: PageProps<{ slug: string }>) {
-  const supabase = createClient();
+interface ClassPageProps {
+  params: Promise<{ slug: string }>;
+}
+
+export default async function ClassPage({ params }: ClassPageProps) {
+  const resolvedParams = await params;
+  const supabase = await createClient();
 
   // ✅ Fetch class using the slug
   const { data: classItem, error } = await supabase
     .from("classes")
     .select("*, students (*)")
-    .eq("slug", params.slug)
+    .eq("slug", resolvedParams.slug)
     .single();
 
   if (error || !classItem) {

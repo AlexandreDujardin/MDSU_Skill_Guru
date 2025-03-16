@@ -40,8 +40,8 @@ export function EditClassForm({ classId, initialName, open, setOpen }: EditClass
             <Input id="name" name="name" defaultValue={initialName} required />
           </div>
           <div className='flex justify-end gap-2'>
-            <Button type="secondary" onClick={() => setOpen(null)}>Annuler</Button>
-            <Button type="primary">Mettre à jour</Button>
+            <Button variantType="secondary" onClick={() => setOpen(null)}>Annuler</Button>
+            <Button variantType="primary">Mettre à jour</Button>
           </div>
         </form>
       </SheetContent>

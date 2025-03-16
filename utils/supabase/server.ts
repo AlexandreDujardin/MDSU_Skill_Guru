@@ -1,8 +1,8 @@
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 
-export const createClient = () => {
-  const cookieStore = cookies();
+export const createClient = async () => {  // ✅ Ajout de async
+  const cookieStore = await cookies();  // ✅ Attendre la résolution
 
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -10,7 +10,7 @@ export const createClient = () => {
     {
       cookies: {
         async get(name: string) {
-          return cookieStore.get(name)?.value;
+          return cookieStore.get(name)?.value; // ✅ Maintenant ça fonctionne
         },
         async set(name: string, value: string, options: any) {
           try {

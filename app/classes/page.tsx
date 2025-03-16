@@ -1,11 +1,9 @@
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
-import { PageLayout } from "@/components/PageLayout";
 import { ClassList } from '@/components/ui/classes/class-list';
-import { AddClassForm } from '@/components/ui/classes/add-class-form';
 
 export default async function ClassesPage() {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data: { session } } = await supabase.auth.getSession();
 
   if (!session) {
@@ -31,7 +29,7 @@ export default async function ClassesPage() {
 
   return (
     <div>
-      <ClassList classes={classes || []} />
+      <ClassList />
     </div>
   );
 }

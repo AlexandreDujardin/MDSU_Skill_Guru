@@ -1,16 +1,19 @@
 import { GameDetail } from "@/components/ui/games/GameDetail";
-import { PageLayout } from "@/components/PageLayout";
 import { createClient } from "@/utils/supabase/server";
-import { PageProps } from "next"; // ✅ Ajout de l'import
 
-export default async function GameDetailPage({ params }: PageProps<{ slug: string }>) {
-  const supabase = createClient();
+interface GameDetailPageProps {
+  params: Promise<{ slug: string }>;
+}
+
+export default async function GameDetailPage({ params }: GameDetailPageProps) {
+  const resolvedParams = await params;
+  const supabase = await createClient();
 
   // Fetch the game by slug
   const { data: game, error } = await supabase
     .from("games")
     .select("*")
-    .eq("slug", params.slug)
+    .eq("slug", resolvedParams.slug)
     .single();
 
   if (error || !game) {

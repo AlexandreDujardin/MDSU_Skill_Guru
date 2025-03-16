@@ -9,7 +9,7 @@ export default async function SuccessPage({ searchParams }: { searchParams: Prom
   const params = await searchParams;
   const sessionId = params.session_id;
 
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data: { session } } = await supabase.auth.getSession();
 
   if (!session) {

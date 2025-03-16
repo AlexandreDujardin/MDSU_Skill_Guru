@@ -3,9 +3,6 @@ import { redirect } from 'next/navigation';
 import { stripe } from '@/utils/stripe';
 import { AccountTabs } from './account-tabs';
 import { PageLayout } from '@/components/PageLayout';
-import { Stripe } from 'stripe';
-
-
 
 // ✅ Définition du type des abonnements et produits
 interface SubscriptionProduct {
@@ -38,7 +35,7 @@ interface SubscriptionData {
 }
 
 export default async function AccountPage() {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data: { session } } = await supabase.auth.getSession();
 
   if (!session) {

@@ -1,7 +1,6 @@
 'use client';
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { createCheckoutSession } from "@/app/actions";
 import { useState } from "react";
 
@@ -10,17 +9,23 @@ interface Product {
   name: string;
   description: string;
   images: string[];
-  features?: string[];
+  features?: (string | Feature)[];
   default_price: {
     id: string;
     unit_amount: number;
     currency: string;
+    recurring?: { interval: "month" | "year" };
   };
 }
 
 interface ProductCardProps {
   product: Product;
 }
+
+interface Feature {
+  name: string;
+}
+
 
 export function ProductCard({ product }: ProductCardProps) {
   const [loading, setLoading] = useState(false);

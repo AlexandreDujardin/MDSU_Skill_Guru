@@ -7,8 +7,18 @@ import { createClient } from "@/utils/supabase/client";
 
 const supabase = createClient();
 
+interface Game {
+  id: string;
+  title: string;
+  description: string;
+  tags: string[];
+  thumbnail: string;
+  slug: string;
+}
+
+
 export const RecommendedGames = () => {
-  const [recommendedGames, setRecommendedGames] = useState([]);
+  const [recommendedGames, setRecommendedGames] = useState<Game[]>([]);
 
   useEffect(() => {
     const fetchGames = async () => {
