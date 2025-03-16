@@ -2,7 +2,14 @@ import { GameDetail } from "@/components/ui/games/GameDetail";
 import { PageLayout } from "@/components/PageLayout";
 import { createClient } from "@/utils/supabase/server";
 
-export default async function GameDetailPage({ params }: { params?: { slug?: string } }) {
+type Props = {
+  params: { slug: string }; // ✅ Typage strict et correct
+};
+
+export default async function GameDetailPage({ params }: Props) {
+  const supabase = createClient();
+
+  // Vérifie que params.slug est bien défini
   if (!params?.slug) {
     return (
       <div className="text-center mt-10">
@@ -11,8 +18,7 @@ export default async function GameDetailPage({ params }: { params?: { slug?: str
     );
   }
 
-  const supabase = createClient();
-
+  // Fetch du jeu via Supabase
   const { data: game, error } = await supabase
     .from("games")
     .select("*")
@@ -32,7 +38,7 @@ export default async function GameDetailPage({ params }: { params?: { slug?: str
       <GameDetail
         title={game.title}
         description={game.description}
-        tag={game.tags[0]}
+        tag={game.tags[0]} // Premier tag utilisé
         video={game.video}
       />
     </PageLayout>
