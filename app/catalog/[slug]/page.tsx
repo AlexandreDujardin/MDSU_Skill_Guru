@@ -2,10 +2,17 @@ import { GameDetail } from "@/components/ui/games/GameDetail";
 import { PageLayout } from "@/components/PageLayout";
 import { createClient } from "@/utils/supabase/server";
 
-export default async function GameDetailPage({ params }: { params: { slug: string } }) {
+export default async function GameDetailPage({ params }: { params?: { slug?: string } }) {
+  if (!params?.slug) {
+    return (
+      <div className="text-center mt-10">
+        <p className="text-xl text-red-500">Paramètre invalide !</p>
+      </div>
+    );
+  }
+
   const supabase = createClient();
 
-  // Fetch the game by slug
   const { data: game, error } = await supabase
     .from("games")
     .select("*")
@@ -25,7 +32,7 @@ export default async function GameDetailPage({ params }: { params: { slug: strin
       <GameDetail
         title={game.title}
         description={game.description}
-        tag={game.tags[0]} // First tag as primary
+        tag={game.tags[0]}
         video={game.video}
       />
     </PageLayout>
