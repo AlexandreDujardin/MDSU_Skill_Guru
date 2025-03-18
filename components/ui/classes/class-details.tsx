@@ -204,11 +204,11 @@ export function ClassDetails({ classItem }: { classItem: Class }) {
                     <TableCell className="px-4 py-3 text-gray-700">
                       #{student.custom_id}
                     </TableCell>
-                    <TableCell className="px-4 py-3 font-semibold">
+                    <TableCell className="px-4 py-3 font-semibold uppercase">
                       {student.last_name}
                     </TableCell>
                     <TableCell className="px-4 py-3">{student.first_name}</TableCell>
-                    <TableCell className="px-4 py-3">{classItem.name}</TableCell>
+                    <TableCell className="px-4 py-3 uppercase">{classItem.name}</TableCell>
                     <TableCell className="px-4 py-3">{classItem.niveau_classe}</TableCell>
                     <TableCell className="px-4 py-3">{classItem.nom_ecole}</TableCell>
                   </TableRow>

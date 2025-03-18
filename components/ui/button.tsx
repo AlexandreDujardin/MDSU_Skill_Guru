@@ -25,7 +25,7 @@ const buttonVariants = cva(
       state: {
         default: "",
         pressed: "opacity-80",
-        disabled: "opacity-50 cursor-not-allowed",
+        disabled: "bg-button-primary-disabled cursor-not-allowed",
       },
     },
     defaultVariants: {

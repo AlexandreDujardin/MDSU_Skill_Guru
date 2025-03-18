@@ -1,29 +1,33 @@
 "use client";
 
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { GameLaunchSheet } from "@/components/ui/games/GameLaunchSheet"; // ⬅️ Importation du component
 
 interface GameDetailProps {
   title: string;
   description: string;
-  tags?: string[]; // 🔹 Permet de gérer le cas où tags n'est pas défini
+  tags?: string[];
   video: string;
   concept: string;
   objectif: string;
 }
 
 export const GameDetail = ({ title, description, tags = [], video, concept, objectif }: GameDetailProps) => {
+  const [openSheet, setOpenSheet] = useState(false);
+
   return (
     <div className="p-6 space-y-8">
-      {/* 🏷️ Section Titre + Tags */}
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold text-text-primary">{title}</h1>
         <div className="flex flex-wrap gap-2">
-          {tags && tags.length > 0 ? (
+          {tags.length > 0 ? (
             tags.map((tag, index) => (
               <Badge key={index} className="bg-border-default text-text-tertiary text-sm px-3 py-1 rounded-full gap-2">
-                <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/games/tags_dark.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJnYW1lcy90YWdzX2Rhcmsuc3ZnIiwiaWF0IjoxNzQyMTAwNzg1LCJleHAiOjE3NzM2MzY3ODV9.f8rQ-o1pkX6awdj4GAbXY77F0249bkatXbbBi4Ow1SE" alt="tags" className="h-4"/>
+                <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/games/tags_dark.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJnYW1lcy90YWdzX2Rhcmsuc3ZnIiwiaWF0IjoxNzQyMTU5MTc0LCJleHAiOjE3NzM2OTUxNzR9.ejQcJJZcNGEM7_DO6rYIKMdQy12mTPYahasXnGi0TUQ"
+                     alt="tags" className="h-4"/>
                 {tag}
               </Badge>
             ))
@@ -50,35 +54,39 @@ export const GameDetail = ({ title, description, tags = [], video, concept, obje
           {/* 📜 Infos Jeu */}
           <div className="flex flex-col p-6 space-y-4 bg-background-primary justify-evenly rounded-r-lg border-2 border-border-default">
             <h2 className="text-2xl font-semibold text-text-primary">{title}</h2>
-            <p className="text-text-tertiary">
-              {description}
-            </p>
+            <p className="text-text-tertiary">{description}</p>
             <div className="text-text-tertiary">
               <p className="font-semibold">Concept du jeu :</p>
               {concept}
             </div>
             <div className="text-text-tertiary">
               <p className="font-semibold">Objectif du jeu :</p> 
-                {objectif}
+              {objectif}
             </div>
           </div>
         </div>
 
-        <div className=" flex items-center justify-end">
+        <div className="flex items-center justify-end">
           {/* 🎮 Boutons Actions */}
           <div className="flex gap-4 mt-4">
-              <Button variantType="secondary" className="flex items-center gap-2 w-min-content">
-                <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/games/settings.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJnYW1lcy9zZXR0aW5ncy5zdmciLCJpYXQiOjE3NDIxMDA3NTUsImV4cCI6MTc3MzYzNjc1NX0.3fCEC-ctvSXHFklZwJxw0ds13IYxu7aces607yJVn8M" alt="programmer" className="h-6"/>
-                Programmer une session
-              </Button>
-              <Button variantType="primary" className="flex items-center gap-2 w-min-content">
-              <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/games/play.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJnYW1lcy9wbGF5LnN2ZyIsImlhdCI6MTc0MjEwMDcyNywiZXhwIjoxNzczNjM2NzI3fQ.r9MIBc6tPJIUIZWvd0M3jFxHNlygGl-7dR26Wikvkbg" alt="programmer" className="h-6"/>
-                Lancer le jeu
-              </Button>
-            </div>
-        </div>
+            <Button variantType="secondary" className="flex items-center gap-2 w-min-content">
+              <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/games/settings.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJnYW1lcy9zZXR0aW5ncy5zdmciLCJpYXQiOjE3NDIxNTkyMzEsImV4cCI6MTc3MzY5NTIzMX0.DkEsv1wZYZZqu4a07A22N7qMNG8PBKAkl5DbvTw-T9s"
+                   alt="programmer" className="h-6"/>
+              Programmer une session
+            </Button>
 
-        {/* 📌 Section Règles du Jeu */}
+            <Button
+              variantType="primary"
+              className="flex items-center gap-2 w-min-content"
+              onClick={() => setOpenSheet(true)}
+            >
+              <img src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/games/play.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJnYW1lcy9wbGF5LnN2ZyIsImlhdCI6MTc0MjE1OTIwNywiZXhwIjoxNzczNjk1MjA3fQ.qMdlsQdlma7G_xQRM7nGBrqYUCrc6oQcA_yIG_r_X30"
+                   alt="programmer" className="h-6"/>
+              Lancer le jeu
+            </Button>
+          </div>
+        </div>
+          {/* 📌 Section Règles du Jeu */}
         <div>
           <h3 className="text-2xl font-bold text-text-primary mb-4">Règles du jeu</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -139,6 +147,7 @@ export const GameDetail = ({ title, description, tags = [], video, concept, obje
           </div>
         </div> 
       </div>  
+      <GameLaunchSheet open={openSheet} onClose={() => setOpenSheet(false)} />
     </div>
   );
 };

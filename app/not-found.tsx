@@ -9,7 +9,7 @@ export default function NotFoundPage() {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col items-center justify-center bg-background-primary text-text-primary text-center h-screen space-y-10">
+    <div className="flex flex-col items-center justify-center bg-background-primary text-text-primary text-center h-full space-y-10">
       {/* 🛑 Titre 404 avec le poulpe animé */}
       <h1 className="flex text-9xl font-bold">
         4
