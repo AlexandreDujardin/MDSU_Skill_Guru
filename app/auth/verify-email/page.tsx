@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 
 export default function VerifyEmail() {
   return (
-    <AuthLayout imageSrc="/images/auth/image-background-connexion-etape-2.svg">
+    <AuthLayout imageSrc="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/auth/image-background-connexion-etape-2.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhdXRoL2ltYWdlLWJhY2tncm91bmQtY29ubmV4aW9uLWV0YXBlLTIuc3ZnIiwiaWF0IjoxNzQyMTAwMDEwLCJleHAiOjE3NzM2MzYwMTB9.7hWhEvsnKxv7XeLz5GddVVUKp-ebqOdU02D5Yy7QopQ">
       <h1 className="text-text-primary text-h1-d font-bold mb-4">Pensez à confirmer votre inscription depuis votre email</h1>
       <span className='text-h2-m text-text-primary'>
           Votre demande d’inscription a bien été prise en compte.

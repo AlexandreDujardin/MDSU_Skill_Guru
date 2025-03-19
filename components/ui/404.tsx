@@ -26,14 +26,12 @@ export default function Rocket404() {
         : { repeat: Infinity, repeatType: "loop", duration: 0.3 }}
       onClick={handleClick}
     >
-      {/* 🚀 Image du vaisseau */}
       <img 
         src="https://xwvfgrzvxtfrolsvnikm.supabase.co/storage/v1/object/sign/icons/icon-poulp-dark.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpY29ucy9pY29uLXBvdWxwLWRhcmsuc3ZnIiwiaWF0IjoxNzQyMTAxMTcyLCJleHAiOjE3NzM2MzcxNzJ9.k5YYlUyFQyaIyv1itE6OgZmFSKteA_rd7DudUW1tVxk" 
-        alt="Rocket" 
+        alt="Easter Egg" 
         className="w-32 h-32"
       />
 
-      {/* 🔥 GIF de la flamme (apparaît au clic et disparaît après 3s) */}
       {showFlame && (
         <div className="absolute -bottom-44 left-1/2 transform -translate-x-1/2">
           <img 
